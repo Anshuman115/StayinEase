@@ -7,7 +7,9 @@ import {
   getSingleRoom,
 } from "@/controllers/roomControllers";
 
-const handler = nc();
+import onError from "../../../middlewares/erros";
+
+const handler = nc({ onError });
 
 dbConnect();
 
