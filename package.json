@@ -10,13 +10,21 @@
     "seeder": "node src/utils/seeder"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.9",
     "@next/font": "13.1.2",
+    "daisyui": "^2.50.0",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
     "mongoose": "^6.8.4",
     "next": "13.1.2",
     "next-connect": "^0.13.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.7.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
   }
 }
