@@ -49,7 +49,7 @@ const roomSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  rating: {
+  ratings: {
     type: Number,
     default: 0,
   },
@@ -109,4 +109,4 @@ const roomSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.models.Room || mongoose.model("Room", roomSchema);
+module.exports = mongoose.models?.Room || mongoose.model("Room", roomSchema);

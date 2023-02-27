@@ -11,14 +11,11 @@
     "airConditioned": false,
     "petsAllowed": false,
     "roomCleaning": true,
+    "ratings": 4.5,
     "images": [
       {
-        "public_id": "bookit/rooms/1_bzynlv",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590762/bookit/rooms/1_bzynlv.jpg"
-      },
-      {
-        "public_id": "bookit/rooms/2_s1u52n",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590761/bookit/rooms/2_s1u52n.jpg"
+        "public_id": "Stayin/16_zkooja.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067581/Stayin/16_zkooja.jpg"
       }
     ],
     "category": "King"
@@ -34,11 +31,12 @@
     "breakfast": false,
     "airConditioned": true,
     "petsAllowed": false,
+    "ratings": 4.2,
     "roomCleaning": true,
     "images": [
       {
-        "public_id": "bookit/rooms/3_quuli7.jpg",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590762/bookit/rooms/3_quuli7.jpg"
+        "public_id": "Stayin/18_zf7ao6.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067581/Stayin/18_zf7ao6.jpg"
       }
     ],
     "category": "Twins"
@@ -54,11 +52,12 @@
     "breakfast": true,
     "airConditioned": true,
     "petsAllowed": true,
+    "ratings": 3.8,
     "roomCleaning": false,
     "images": [
       {
-        "public_id": "bookit/rooms/4_sju0ql",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590765/bookit/rooms/4_sju0ql.jpg"
+        "public_id": "Stayin/12_bi31fa.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067581/Stayin/12_bi31fa.jpg"
       }
     ],
     "category": "King"
@@ -73,16 +72,13 @@
     "internet": true,
     "breakfast": true,
     "airConditioned": true,
+    "ratings": 2.5,
     "petsAllowed": false,
     "roomCleaning": true,
     "images": [
       {
-        "public_id": "bookit/rooms/5_jmydt6",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590762/bookit/rooms/5_jmydt6.jpg"
-      },
-      {
-        "public_id": "bookit/rooms/6_nwmr5f",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590764/bookit/rooms/6_nwmr5f.jpg"
+        "public_id": "Stayin/17_epndl1.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067579/Stayin/17_epndl1.jpg"
       }
     ],
     "category": "Single"
@@ -98,11 +94,12 @@
     "breakfast": true,
     "airConditioned": true,
     "petsAllowed": false,
+    "ratings": 4.0,
     "roomCleaning": true,
     "images": [
       {
-        "public_id": "bookit/rooms/7_hshhzq",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590764/bookit/rooms/7_hshhzq.jpg"
+        "public_id": "Stayin/15_g3vov9.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067579/Stayin/15_g3vov9.jpg"
       }
     ],
     "category": "King"
@@ -121,8 +118,8 @@
     "roomCleaning": true,
     "images": [
       {
-        "public_id": "bookit/rooms/8_crn0xy",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590765/bookit/rooms/8_crn0xy.jpg"
+        "public_id": "Stayin/13_karp7y.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067578/Stayin/13_karp7y.jpg"
       }
     ],
     "category": "Twins"
@@ -141,8 +138,8 @@
     "roomCleaning": false,
     "images": [
       {
-        "public_id": "bookit/rooms/9_konrjf",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590849/bookit/rooms/9_konrjf.jpg"
+        "public_id": "Stayin/11_hqoolx.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067578/Stayin/11_hqoolx.jpg"
       }
     ],
     "category": "Single"
@@ -161,8 +158,8 @@
     "roomCleaning": true,
     "images": [
       {
-        "public_id": "bookit/rooms/10_w8w8yi",
-        "url": "https://res.cloudinary.com/bookit/image/upload/v1618590840/bookit/rooms/10_w8w8yi.jpg"
+        "public_id": "Stayin/14_lwmdxx.jpg",
+        "url": "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067584/Stayin/14_lwmdxx.jpg"
       }
     ],
     "category": "Single"

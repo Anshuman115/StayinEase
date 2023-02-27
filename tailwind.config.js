@@ -11,6 +11,12 @@ module.exports = {
     "./node_modules/flowbite-react/**/*.js",
   ],
   theme: {
+    screens: {
+      sm: "320px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+    },
     extend: {},
   },
   darkMode: "class",

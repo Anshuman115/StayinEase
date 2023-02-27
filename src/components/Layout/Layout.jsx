@@ -2,6 +2,9 @@ import Head from "next/head.js";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Layout = ({ children, title = "Stayin" }) => {
   return (
     <div>
@@ -9,6 +12,7 @@ const Layout = ({ children, title = "Stayin" }) => {
         <title>{title}</title>
       </Head>
       <Header />
+      <ToastContainer position="bottom-right" />
       {children}
       <Footer />
     </div>
