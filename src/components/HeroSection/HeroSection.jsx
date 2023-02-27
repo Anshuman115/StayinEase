@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import mainImage from "../../Images/h1_hero1.png.jpeg";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -17,9 +18,11 @@ const HeroSection = () => {
               a new dimension of luxury
             </div>
             <div className="py-4">
-              <button className="btn glass bg-[#a15233] text-white bg-none">
-                view more
-              </button>
+              <Link href="/rooms">
+                <button className="btn glass bg-[#a15233] text-white bg-none">
+                  View More
+                </button>
+              </Link>
             </div>
           </div>
         </div>

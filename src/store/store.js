@@ -1,20 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { roomsApi } from "./services/roomsApi";
-import allRoomsSlice from "./slices/allRoomsSlice";
+import allRoomsReducer from "./slices/allRoomsSlice";
+import singleRoomsReducer from "./slices/singleRoomsSlice";
 
 const makeStore = () =>
   configureStore({
     reducer: {
-      [allRoomsSlice.name]: allRoomsSlice.reducer,
-      [roomsApi.reducerPath]: roomsApi.reducer,
+      rooms: allRoomsReducer,
+      singleRoom: singleRoomsReducer,
     },
     devTools: true,
-
-    // Adding the api middleware enables caching, invalidation, polling,
-    // and other useful features of `rtk-query`.
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(roomsApi.middleware),
   });
 
 export const wrapper = createWrapper(makeStore);

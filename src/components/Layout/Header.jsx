@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { AiOutlineUser } from "react-icons/ai";
 import Link from "next/link";
+let arr = [4, 3, 1, 5, 6, -1];
+console.log(Math.min.apply(Math.arr));
 const Header = () => {
   return (
     <div className="navbar mx-auto my-0 bg-[#391f14] ">
@@ -9,9 +11,9 @@ const Header = () => {
         <a className="normal-case text-2xl md:pl-[100px] text-white">Stayin</a>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-white cormorant ">
           <li>
-            <a>Home</a>
+            <Link href="/">Home</Link>
           </li>
           <li>
             <a>About</a>
@@ -26,9 +28,9 @@ const Header = () => {
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <label tabIndex={0} className="btn btn-ghost btn-circle ">
+            <div className="rounded-full">
+              <AiOutlineUser color="white" />
             </div>
           </label>
           <ul

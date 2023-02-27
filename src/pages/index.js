@@ -1,14 +1,11 @@
 import React from "react";
 import Layout from "@/components/Layout/Layout";
-import Home from "./Home";
-
-import { wrapper } from "@/store/store";
-import { useGetRoomsQuery } from "@/store/services/roomsApi";
+import HeroSection from "@/components/HeroSection/HeroSection";
 
 const HomePage = () => {
   return (
     <Layout>
-      <Home />
+      <HeroSection />
     </Layout>
   );
 };

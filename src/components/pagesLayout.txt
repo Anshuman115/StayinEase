@@ -1,0 +1,19 @@
+// HomePage
+// Hotels page with pagination
+// Search rooms page
+// room details page with slider, calender,....etc
+// calender component
+// Log in page
+// Sign up page
+// Profile page with update feature
+// My booking page
+// Stripe checkout page
+// Booking details page
+// Download invoice of bookings
+// Submit my review modal
+// Admin panel
+// Rooms details - for Admin
+// All bookings for Admin
+// Users list for admin
+// forgot password page
+//
