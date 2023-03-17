@@ -3,9 +3,12 @@ import axios from "axios";
 
 export const fetchAllRooms = createAsyncThunk(
   `rooms/fetchAllRooms`,
-  async () => {
-    const response = await axios.get("http://localhost:3000/api/rooms");
-    console.log(response);
+  async (data) => {
+    let { page = 1, location = "" } = data;
+    console.log(page, location);
+    const response = await axios.get(
+      `http://localhost:3000/api/rooms?page=${page}&location=${location}`
+    );
     return response.data;
   }
 );

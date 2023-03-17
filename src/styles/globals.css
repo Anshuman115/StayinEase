@@ -18,3 +18,39 @@ font-family: 'Cormorant', serif;
 .cormorant{
    font-family: 'Cormorant', serif;
 }
+
+
+.pagination {
+  align-items: center;
+  background-color: #fff7f3;
+  display: flex;
+  flex-direction: row;
+  height: 10px;
+  justify-content: center;
+  list-style-type: none;
+  position: relative;
+  width: 100%;
+}
+
+.pagination li{
+  border: 2px solid black;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+}
+
+.pagination li a {
+  color:darkgreen;
+  font-weight: 600;
+}
+
+.pagination li.active{
+  background: rgb(8, 67, 168);
+}
+
+.pagination li.active a{
+  color: white;
+  font-weight: 700;
+}
