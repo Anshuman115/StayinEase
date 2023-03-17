@@ -1,56 +1,103 @@
 import room from "@/models/room";
-import React from "react";
-import { useSelector } from "react-redux";
+import Image from "next/image";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FcCheckmark, FcCancel } from "react-icons/fc";
+import { useRouter } from "next/router";
+import { fetchRoom } from "@/store/slices/singleRoomsSlice";
+
+const d = {
+  success: true,
+  room: {
+    _id: "63fb9a48bc1ed9882082e63c",
+    name: "Downtown Portsmouth Private Getaway! Hot Tub",
+    pricePerNight: 85,
+    description:
+      "Absolutely the best location in Portsmouth! Beautifully furnished, this spacious and private home is perfectly suited for taking in all of the must-see sights and historic landmarks that make this vibrant city so unique. Situated near the banks of the Piscataqua River just minutes away from Strawbery Banke Museum, Prescott Park, USS Albacore Museum, Market Square and more!",
+    address: "3747 Parkway Street, Apple Valley, CA, 92307",
+    guestCapacity: 3,
+    numOfBeds: 2,
+    internet: true,
+    breakfast: true,
+    airConditioned: true,
+    petsAllowed: true,
+    roomCleaning: false,
+    ratings: 3.8,
+    numOfReviews: 0,
+    images: [
+      {
+        public_id: "Stayin/12_bi31fa.jpg",
+        url: "https://res.cloudinary.com/degcjqpbu/image/upload/v1677067581/Stayin/12_bi31fa.jpg",
+        _id: "63fb9a48bc1ed9882082e63d",
+      },
+    ],
+    category: "King",
+    reviews: [],
+    createdAt: "2023-02-26T17:43:36.418Z",
+    __v: 0,
+  },
+};
 
 const RoomDetails = () => {
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!router.isReady) {
+      console.log(router.query);
+      return;
+    }
+    const { query } = router;
+    dispatch(fetchRoom(query));
+  }, [router]);
+
   const data = useSelector((state) => state.singleRoom.room);
-  console.log("anshu", data);
+
   return (
-    // <div className="flex flex-col items-center justify-center min-h-screen">
-    //   <div className="max-w-4xl w-full bg-white shadow-md rounded-lg overflow-hidden">
-    //     {/* Room image */}
-    //     <div className="relative">
-    //       {/* <Image src="/images/room.jpg" alt="Room" /> */}
-    //       <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-4">
-    //         <h1 className="text-4xl font-bold mb-2">Deluxe Room</h1>
-    //         <p className="text-lg font-semibold">
-    //           Starting from $150 per night
-    //         </p>
-    //       </div>
-    //     </div>
-    //     {/* Room details */}
-    //     <div className="p-4">
-    //       <div className="flex flex-wrap justify-between items-center mb-4">
-    //         <div className="flex items-center">
-    //           <FaBed className="text-gray-500 mr-2" />
-    //           <p className="text-gray-600">2 King Beds</p>
-    //         </div>
-    //         <div className="flex items-center">
-    //           <FaWifi className="text-gray-500 mr-2" />
-    //           <p className="text-gray-600">Free Wi-Fi</p>
-    //         </div>
-    //         <div className="flex items-center">
-    //           <FaShower className="text-gray-500 mr-2" />
-    //           <p className="text-gray-600">Private Bathroom</p>
-    //         </div>
-    //       </div>
-    //       <p className="text-gray-600 mb-4">
-    //         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-    //         tempor metus vitae quam auctor, id luctus urna consequat. Nullam ac
-    //         nulla non erat tincidunt convallis. Nam eu est justo. Integer
-    //         consectetur neque ac urna bibendum imperdiet. In sagittis quam ac
-    //         ante dictum, eu laoreet mi pellentesque.
-    //       </p>
-    //       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    //         Book Now
-    //       </button>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="bg-[#fff7f3] w-full">
-      <div className="p-5 flex justify-end">
-        <div className="relative flex flex-col h-full bg-indigo-700 shadow-lg rounded-lg p-5">
-          <div className="absolute top-0 right-5">
+      <div className="p-5 flex justify-between">
+        <div>
+          {data?.images && (
+            <Image
+              src={data?.images[0]?.url}
+              alt="hotel"
+              width={700}
+              height={700}
+            />
+          )}
+        </div>
+        <div className="flex flex-col p-2 w-[30%]">
+          <div className="text-black">{data?.description}</div>
+          <div className="flex flex-col p-2">
+            <div className="flex flex-row items-center">
+              <div>{data?.internet ? <FcCheckmark /> : <FcCancel />}</div>
+              <span className="text-black px-2 font-semibold">Wifi</span>
+            </div>
+            <div className="flex flex-row items-center">
+              <div>{data?.roomCleaning ? <FcCheckmark /> : <FcCancel />}</div>
+              <span className="text-black px-2 font-semibold">
+                Room Cleaning
+              </span>
+            </div>
+            <div className="flex flex-row items-center">
+              <div>{data?.airConditioned ? <FcCheckmark /> : <FcCancel />}</div>
+              <span className="text-black px-2 font-semibold">AC</span>
+            </div>
+            <div className="flex flex-row items-center">
+              <div>{data?.breakfast ? <FcCheckmark /> : <FcCancel />}</div>
+              <span className="text-black px-2 font-semibold">Breakfast</span>
+            </div>
+            <div className="flex flex-row items-center">
+              <div>{data?.petsAllowed ? <FcCheckmark /> : <FcCancel />}</div>
+              <span className="text-black px-2 font-semibold">
+                Pets Allowed
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="relative flex flex-col h-full bg-[#6e3a24] shadow-lg rounded-lg p-5 max-w-xs">
+          <div className="absolute top-0 right-5 ">
             <div className="text-xs inline-flex font-semibold bg-green-100 text-green-600 rounded-full text-center px-3 py-1.5 shadow-sm transform -translate-y-1/2">
               Most Popular
             </div>
@@ -58,61 +105,19 @@ const RoomDetails = () => {
 
           <header className="pb-4 mb-4 border-b border-indigo-200 border-opacity-30">
             <h3 className="text-xl font-extrabold text-indigo-50 leading-snug mb-2">
-              {data.name}
+              {data?.name}
             </h3>
 
             <div className="font-extrabold mb-1">
               <span className="text-2xl text-indigo-200">$ </span>
               <span className="text-4xl text-indigo-50">
-                {data.pricePerNight}
+                {data?.pricePerNight}
               </span>
             </div>
           </header>
 
-          <ul className="text-indigo-200 text-sm space-y-2 flex-grow mb-6">
-            <li className="flex items-center">
-              <svg
-                className="w-3 h-3 fill-current text-green-500 mr-3 flex-shrink-0"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-              </svg>
-              <span>Lorem ipsum dolor sit amet consecte.</span>
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="w-3 h-3 fill-current text-green-500 mr-3 flex-shrink-0"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-              </svg>
-              <span>Lorem ipsum dolor sit amet consecte.</span>
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="w-3 h-3 fill-current text-green-500 mr-3 flex-shrink-0"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-              </svg>
-              <span>Lorem ipsum dolor sit amet consecte.</span>
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="w-3 h-3 fill-current text-green-500 mr-3 flex-shrink-0"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
-              </svg>
-              <span>Lorem ipsum dolor sit amet consecte.</span>
-            </li>
-          </ul>
-          <button className="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-400 hover:bg-green-500 text-white focus:outline-none focus-visible:ring-2">
-            Call To Action
+          <button className="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-700 hover:bg-green-600 text-white focus:outline-none focus-visible:ring-2">
+            Book Now
           </button>
         </div>
       </div>
