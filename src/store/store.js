@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import allRoomsReducer from "./slices/allRoomsSlice";
 import singleRoomsReducer from "./slices/singleRoomsSlice";
+import usersReducer from "./slices/usersSlice";
 
 const makeStore = () =>
   configureStore({
     reducer: {
       rooms: allRoomsReducer,
       singleRoom: singleRoomsReducer,
+      userAuth: usersReducer,
     },
     devTools: true,
   });

@@ -42,7 +42,7 @@ export const allRoomsSlice = createSlice({
       })
       .addCase(fetchAllRooms.rejected, (state, action) => {
         state.isLoading = false;
-        state.successc = true;
+        state.success = false;
       });
   },
 });
