@@ -1,8 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Link from "next/link";
 import Image from "next/image";
+import ButtonLoader from "../Layout/ButtonLoader";
 
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "@/store/slices/usersSlice";
+import { useRouter } from "next/router";
 const Register = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const { name, email, password } = user;
+
+  const [avatar, setAvatar] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState(
+    "https://res.cloudinary.com/anshuman115cloud/image/upload/v1679168632/Stayin/avatar_default_oooqui.png"
+  );
+
+  const { success, error, loading } = useSelector((state) => state.userAuth);
+
+  useEffect(() => {
+    if (success) {
+      router.push("/login");
+    }
+    if (error) {
+      toast.error(error);
+      //clear error
+    }
+  }, [dispatch, success, error]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      name,
+      email,
+      password,
+      avatar,
+    };
+    dispatch(registerUser(userData));
+  };
+
+  const handleOnchange = (e) => {
+    if (e.target.name === "avatar") {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatar(reader.result);
+          setAvatarPreview(reader.result);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    }
+  };
+
   return (
     <>
       <section className="bg-[#fff7f3] dark:bg-gray-900">
@@ -79,43 +139,29 @@ const Register = () => {
 
               <form
                 className="mt-8 grid grid-cols-6 gap-6"
-                // onSubmit={submitHandler}
+                onSubmit={submitHandler}
               >
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6 sm:col-span-6">
                   <label
-                    for="FirstName"
+                    htmlFor="FirstName"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                   >
-                    First Name
+                    Full Name
                   </label>
 
                   <input
                     type="text"
-                    id="FirstName"
-                    name="first_name"
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
-                  />
-                </div>
-
-                <div className="col-span-6 sm:col-span-3">
-                  <label
-                    for="LastName"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-                  >
-                    Last Name
-                  </label>
-
-                  <input
-                    type="text"
-                    id="LastName"
-                    name="last_name"
+                    id="name"
+                    name="name"
+                    value={name}
+                    onChange={handleOnchange}
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                   />
                 </div>
 
                 <div className="col-span-6">
                   <label
-                    for="Email"
+                    htmlFor="Email"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                   >
                     Email
@@ -123,15 +169,43 @@ const Register = () => {
 
                   <input
                     type="email"
-                    id="Email"
+                    id="email"
                     name="email"
+                    value={email}
+                    onChange={handleOnchange}
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                   />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
                   <label
-                    for="Password"
+                    htmlFor="Password"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+                  >
+                    Avatar
+                  </label>
+                  <figure>
+                    <Image
+                      src={avatarPreview}
+                      alt="imgAvatar"
+                      width={50}
+                      height={50}
+                    />
+                  </figure>
+                  <input
+                    type="file"
+                    id="avatar"
+                    name="avatar"
+                    accept="images/*"
+                    onChange={handleOnchange}
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                  />
+                  <label htmlFor="customFile">choose avatar</label>
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <label
+                    htmlFor="Password"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                   >
                     Password
@@ -141,13 +215,15 @@ const Register = () => {
                     type="password"
                     id="Password"
                     name="password"
+                    value={password}
+                    onChange={handleOnchange}
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                   />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
                   <label
-                    for="PasswordConfirmation"
+                    htmlFor="PasswordConfirmation"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                   >
                     Password Confirmation
@@ -162,7 +238,7 @@ const Register = () => {
                 </div>
 
                 <div className="col-span-6">
-                  <label for="MarketingAccept" className="flex gap-4">
+                  <label htmlFor="MarketingAccept" className="flex gap-4">
                     <input
                       type="checkbox"
                       id="MarketingAccept"
@@ -198,18 +274,22 @@ const Register = () => {
                 </div>
 
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                  <button className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white">
-                    Create an account
+                  <button
+                    type="submit"
+                    disabled={loading ? true : false}
+                    className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white"
+                  >
+                    {loading ? <ButtonLoader /> : "Create an account"}
                   </button>
 
                   <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
                     Already have an account?{" "}
-                    <a
+                    <Link
                       href="/login"
                       className="text-gray-700 underline dark:text-gray-200"
                     >
                       Log in
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>

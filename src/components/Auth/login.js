@@ -3,19 +3,27 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import Image from "next/image";
+import ButtonLoader from "../Layout/ButtonLoader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  const [loading, setLoading] = useState(false);
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const result = await signIn("credentials", {
       redirect: false,
       email,
       password,
     });
+    await delay(2000);
     console.log("result", result);
+    setLoading(false);
     if (result.error) {
       toast.error(result.error);
     } else {
@@ -67,9 +75,10 @@ const Login = () => {
               <div className="mt-8 flex justify-center text-lg text-black">
                 <button
                   type="submit"
+                  disabled={loading ? true : false}
                   className="rounded-3xl bg-yellow-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
                 >
-                  Login
+                  {loading ? <ButtonLoader /> : "Login"}
                 </button>
               </div>
             </form>
