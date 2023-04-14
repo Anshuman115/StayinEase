@@ -1,19 +1,37 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  createReducer,
+} from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import allRoomsReducer from "./slices/allRoomsSlice";
 import singleRoomsReducer from "./slices/singleRoomsSlice";
 import usersReducer from "./slices/usersSlice";
 
-const makeStore = () =>
-  configureStore({
-    reducer: {
-      rooms: allRoomsReducer,
-      singleRoom: singleRoomsReducer,
-      userAuth: usersReducer,
-    },
-    devTools: true,
-  });
+const combinedReducers = combineReducers({
+  rooms: allRoomsReducer,
+  singleRoom: singleRoomsReducer,
+  userAuth: usersReducer,
+});
 
+const rootReducer = createReducer(
+  combinedReducers(undefined, { type: "" }),
+  (builder) => {
+    builder
+      .addCase("__NEXT_REDUX_WRAPPER_HYDRATE__", (state, action) => ({
+        ...state,
+        ...action.payload,
+      }))
+      .addDefaultCase(combinedReducers);
+  }
+);
+
+const makeStore = () => {
+  const store = configureStore({
+    reducer: rootReducer,
+  });
+  return store;
+};
 export const wrapper = createWrapper(makeStore);
 
 //redux toolkit

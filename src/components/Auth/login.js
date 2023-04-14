@@ -4,11 +4,11 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import Image from "next/image";
 import ButtonLoader from "../Layout/ButtonLoader";
-
+import { useRouter } from "next/router";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const router = useRouter();
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const [loading, setLoading] = useState(false);
@@ -21,13 +21,13 @@ const Login = () => {
       email,
       password,
     });
-    await delay(2000);
-    console.log("result", result);
+    // await delay(2000);
+    // console.log("result", result);
     setLoading(false);
     if (result.error) {
       toast.error(result.error);
     } else {
-      window.location.href = "/";
+      router.back();
     }
   };
   return (
@@ -44,8 +44,7 @@ const Login = () => {
               <img
                 src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logo.wine.svg"
                 width="150"
-                alt=""
-                srcset=""
+                alt="ss"
               />
               <h1 className="mb-2 text-2xl">Stayin</h1>
               <span className="text-gray-300">Enter Login Details</span>
