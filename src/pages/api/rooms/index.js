@@ -7,7 +7,7 @@ import {
   getSingleRoom,
 } from "@/controllers/roomControllers";
 
-import onError from "../../../middlewares/erros";
+import onError from "../../../middlewares/errors";
 
 const handler = nc({ onError });
 

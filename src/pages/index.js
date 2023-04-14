@@ -1,6 +1,8 @@
 import React from "react";
 import Layout from "@/components/Layout/Layout";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import { fetchAllRooms } from "@/store/slices/allRoomsSlice";
+import { wrapper } from "@/store/store";
 
 const HomePage = () => {
   return (
@@ -11,6 +13,20 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req, query }) => {
+      const { page, location } = query;
+      try {
+        const result = await store.dispatch(
+          fetchAllRooms({ req, page, location })
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+);
 
 // export const getServerSideProps = wrapper.getServerSideProps(() => {
 //   const { data: rooms } = useGetRoomsQuery();

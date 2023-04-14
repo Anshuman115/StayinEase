@@ -2,8 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { AiOutlineUser } from "react-icons/ai";
 import Link from "next/link";
-let arr = [4, 3, 1, 5, 6, -1];
-console.log(Math.min.apply(Math.arr));
 const Header = () => {
   return (
     <div className="navbar mx-auto my-0 bg-[#391f14] ">
@@ -47,7 +45,7 @@ const Header = () => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <Link href="/login">Login</Link>
             </li>
           </ul>
         </div>

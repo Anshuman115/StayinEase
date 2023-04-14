@@ -3,7 +3,7 @@ import dbConnect from "../../../config/dbConnect";
 
 import { registerUser } from "@/controllers/authController";
 
-import onError from "../../../middlewares/erros";
+import onError from "../../../middlewares/errors";
 
 const handler = nc({ onError });
 

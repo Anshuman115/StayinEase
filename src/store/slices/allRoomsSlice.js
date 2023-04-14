@@ -1,15 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import absoluteUrl from "next-absolute-url";
 
 export const fetchAllRooms = createAsyncThunk(
   `rooms/fetchAllRooms`,
-  async (data) => {
-    let { page = 1, location = "" } = data;
-    console.log(page, location);
-    const response = await axios.get(
-      `http://localhost:3000/api/rooms?page=${page}&location=${location}`
-    );
-    return response.data;
+  async (
+    { req, page = 1, location = "", guest, category },
+    { rejectWithValue }
+  ) => {
+    // let { page = 1, location = "", req } = data;
+    const { origin } = absoluteUrl(req);
+    // console.log(page, location);
+    let link = `${origin}/api/rooms?page=${page}&location=${location}`;
+    try {
+      const { data } = await axios.get(link);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
   }
 );
 

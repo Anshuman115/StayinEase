@@ -11,12 +11,13 @@ const Rooms = () => {
   const router = useRouter();
   let { page = 1 } = router.query;
   page = Number(page);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchAllRooms({ page: page }));
-  }, [page, dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchAllRooms({ page: page }));
+  // }, [page, dispatch]);
 
   const data = useSelector((state) => state.rooms);
+  console.log("data", data);
 
   const handlePagination = (pageNumber) => {
     router.push(`/rooms/?page=${pageNumber}`);

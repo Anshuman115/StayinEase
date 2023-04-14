@@ -7,20 +7,20 @@ const Search = () => {
   const router = useRouter();
   const [location, setLocation] = useState("");
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    console.log("hellow");
-    dispatch(fetchAllRooms({ location: location }));
-  }, [location, dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   console.log("hellow");
+  //   dispatch(fetchAllRooms({ location: location }));
+  // }, [location, dispatch]);
 
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   if (location.trim()) {
-  //     router.push(`/rooms/?location=${location}`);
-  //   } else {
-  //     router.push("/rooms/");
-  //   }
-  // };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (location.trim()) {
+      router.push(`/rooms/?location=${location}`);
+    } else {
+      router.push("/rooms/");
+    }
+  };
 
   //Category & Guest size filters to be added
   return (

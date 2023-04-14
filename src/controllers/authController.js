@@ -7,6 +7,7 @@ import ErrorHandler from "@/utils/errorHandler";
 import catchAsyncErrors from "@/middlewares/catchAsyncErrors";
 
 import APIFeatures from "@/utils/apiFeatures";
+import { getSession } from "next-auth/react";
 
 //Setting up cloudinary config
 cloudinary.config({
@@ -38,4 +39,14 @@ const registerUser = catchAsyncErrors(async (req, res) => {
   });
 });
 
-export { registerUser };
+// current user profile => /api/me
+const currentUserProfile = catchAsyncErrors(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+export { registerUser, currentUserProfile };
