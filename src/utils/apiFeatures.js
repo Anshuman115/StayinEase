@@ -10,7 +10,7 @@ class APIFeatures {
           address: new RegExp(this.queryStr.location, "i"),
         }
       : {};
-    console.log(location);
+    // console.log(location);
     this.query = this.query.find({ ...location });
     return this;
   }

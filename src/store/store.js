@@ -7,11 +7,13 @@ import { createWrapper } from "next-redux-wrapper";
 import allRoomsReducer from "./slices/allRoomsSlice";
 import singleRoomsReducer from "./slices/singleRoomsSlice";
 import usersReducer from "./slices/usersSlice";
+import userUpdateReducer from "./slices/updateUserSlice";
 
 const combinedReducers = combineReducers({
   rooms: allRoomsReducer,
   singleRoom: singleRoomsReducer,
   userAuth: usersReducer,
+  userUpdate: userUpdateReducer,
 });
 
 const rootReducer = createReducer(
@@ -29,10 +31,11 @@ const rootReducer = createReducer(
 const makeStore = () => {
   const store = configureStore({
     reducer: rootReducer,
+    devTools: true,
   });
   return store;
 };
-export const wrapper = createWrapper(makeStore);
+export const wrapper = createWrapper(makeStore, { debug: true });
 
 //redux toolkit
 //components => store,slices, api calls;

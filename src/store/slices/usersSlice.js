@@ -18,6 +18,18 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const loadUser = createAsyncThunk(`api/me`, async () => {
+  // console.log("heree");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await axios.get(`http://localhost:3000/api/me`, config);
+  // console.log("response", response);
+  return response.data;
+});
+
 // export const clearErrors = () => async (dispatch) => {
 //   dispatch({});
 // };
@@ -39,13 +51,28 @@ export const usersSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state) => {
         state.isLoading = false;
         state.success = true;
       })
-      .addCase(registerUser.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state) => {
         state.isLoading = false;
         state.success = false;
+      })
+      .addCase(loadUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(loadUser.fulfilled, (state, action) => {
+        // console.log("here");
+        state.isLoading = false;
+        state.success = true;
+        state.user = action.payload.user;
+      })
+      .addCase(loadUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.success = false;
+        state.error = action.payload;
       });
   },
 });

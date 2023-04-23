@@ -20,7 +20,7 @@ export default NextAuth({
 
         //Find user in the database
         const user = await User.findOne({ email }).select("+password");
-        console.log("User found:", user);
+        // console.log("User found:", user);
 
         if (!user) {
           throw new Error("Invalid email or password");

@@ -45,7 +45,7 @@ const RoomDetails = () => {
 
   useEffect(() => {
     if (!router.isReady) {
-      console.log(router.query);
+      // console.log(router.query);
       return;
     }
     const { query } = router;

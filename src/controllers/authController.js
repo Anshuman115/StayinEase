@@ -20,7 +20,9 @@ const registerUser = catchAsyncErrors(async (req, res) => {
   const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: "Stayin/Avatars",
     width: 150,
-    crop: "scale",
+    crop: "thumb",
+    gravity: "face",
+    radius: "max",
   });
 
   const { name, email, password } = req.body;
@@ -49,4 +51,41 @@ const currentUserProfile = catchAsyncErrors(async (req, res) => {
   });
 });
 
-export { registerUser, currentUserProfile };
+// Update user profile => /api/me/update
+const updateUserProfile = catchAsyncErrors(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name;
+    user.email = req.body.email;
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    if (req.body.avatar) {
+      const image_id = user.avatar.public_id;
+      //delete user prev image/avatar
+      await cloudinary.v2.uploader.destroy(image_id);
+      const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "Stayin/Avatars",
+        width: 150,
+        crop: "thumb",
+        gravity: "face",
+        radius: "max",
+      });
+      user.avatar = {
+        public_id: result.public_id,
+        url: result.secure_url,
+      };
+    }
+  }
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+export { registerUser, currentUserProfile, updateUserProfile };
