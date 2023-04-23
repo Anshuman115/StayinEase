@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchRoom = createAsyncThunk(`rooms/fetchRoom`, async (data) => {
   const { id } = data;
   const response = await axios.get(`http://localhost:3000/api/rooms/${id}`);
-  console.log(response);
+  // console.log(response);
   return response.data;
 });
 

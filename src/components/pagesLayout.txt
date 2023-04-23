@@ -17,3 +17,17 @@
 // Users list for admin
 // forgot password page
 //
+
+
+//problem faced
+//getServerSideProps
+//Warning: Cannot update a component (`Header`) while rendering a different component (`MyApp`). To locate the bad setState() call inside `MyApp`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
+MyApp@webpack-internal:///./src/pages/_app.js:16:35
+PathnameContextProviderAdapter@webpack-internal:///./node_modules/next/dist/shared/lib/router/adapters.js:62:34
+ErrorBoundary@webpack-internal:///./node_modules/next/dist/compiled/@next/react-dev-overlay/dist/client.js:301:63
+ReactDevOverlay@webpack-internal:///./node_modules/next/dist/compiled/@next/react-dev-overlay/dist/client.js:850:908
+Container@webpack-internal:///./node_modules/next/dist/client/index.js:61:1
+AppContainer@webpack-internal:///./node_modules/next/dist/client/index.js:171:25
+Root@webpack-internal:///./node_modules/next/dist/client/index.js:346:37 next-dev.js:20:25
+//next redux wrapper docs problems
+//_app js setup problem resolved from docs

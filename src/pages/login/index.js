@@ -13,19 +13,19 @@ const LoginPage = () => {
 
 export default LoginPage;
 
-// export async function getServerSideProps(context) {
-//   const { req } = context;
-//   const session = await getSession({ req });
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const session = await getSession({ req });
 
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
-//   return {
-//     props: {},
-//   };
-// }
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}
