@@ -14,6 +14,7 @@ const UpdateProfilePage = () => {
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
   if (!session) {
+    console.log("redirected");
     return {
       redirect: {
         destination: "/login",

@@ -7,14 +7,10 @@ import { signOut } from "next-auth/react";
 
 const Header = () => {
   console.log("rendering header");
-  const [count, setCount] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (count == 1) {
-      dispatch(loadUser());
-      setCount(0);
-    }
-  }, [dispatch]);
+    dispatch(loadUser());
+  }, []);
   const { user, isLoading } = useSelector((state) => state.userAuth);
 
   // console.log(user?.avatar?.url);
@@ -61,18 +57,18 @@ const Header = () => {
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <div className="justify-between">
-                  <Link href="/me/update">Profile</Link>
-                  <span className="badge">New</span>
-                </div>
+                <Link href="/me/update">
+                  <div className="justify-between">
+                    <div>Profile</div>
+                    <span className="badge">New</span>
+                  </div>
+                </Link>
               </li>
               <li>
                 <a>My Bookings</a>
               </li>
               <li className="text-red-500">
-                <Link href="/" onClick={handleSignOut}>
-                  Logout
-                </Link>
+                <button onClick={handleSignOut}>Logout</button>
               </li>
             </ul>
           </div>

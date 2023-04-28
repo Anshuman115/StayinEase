@@ -71,6 +71,9 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              <div>
+                <Link href="/forgotPassword">Forgot password</Link>
+              </div>
               <div className="mt-8 flex justify-center text-lg text-black">
                 <button
                   type="submit"

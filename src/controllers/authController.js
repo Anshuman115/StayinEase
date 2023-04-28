@@ -8,6 +8,8 @@ import catchAsyncErrors from "@/middlewares/catchAsyncErrors";
 
 import APIFeatures from "@/utils/apiFeatures";
 import { getSession } from "next-auth/react";
+import absoluteUrl from "next-absolute-url";
+import sendEmail from "@/utils/sendEmail";
 
 //Setting up cloudinary config
 cloudinary.config({
@@ -88,4 +90,47 @@ const updateUserProfile = catchAsyncErrors(async (req, res) => {
   });
 });
 
-export { registerUser, currentUserProfile, updateUserProfile };
+//Forgot password => /api/password/forgot
+const forgotPassword = catchAsyncErrors(async (req, res) => {
+  const user = await User.findOne(req.body.email);
+  if (!user) {
+    return next(new ErrorHandler("User Not Registered", 404));
+  }
+
+  //get origin
+  const { origin } = absoluteUrl(req);
+
+  //Get reset token
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  //Create reset password url
+  const resetUrl = `${origin}/password/reset/${resetToken}`;
+
+  //message
+  const message = `Your Password reset url is as follow: \n\n ${resetUrl} \n\n
+  If you have not requested this email then ignore it`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "StayinEase Password Recovery",
+      message,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to : ${user.email}`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+export { registerUser, currentUserProfile, updateUserProfile, forgotPassword };

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 import isEmail from "validator/lib/isEmail";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -55,6 +56,22 @@ userSchema.pre("save", async function (next) {
 //compare user password
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
+};
+
+//Generate password reset token
+userSchema.methods.getResetPasswordToken = function () {
+  //generate token
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  //Encrypt password OR Hash and set to resetPasswordtoke field
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  //set token expiry time
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000; //In ms -> 5 mins
+  return resetToken;
 };
 
 export default mongoose.models?.User || mongoose.model("User", userSchema);

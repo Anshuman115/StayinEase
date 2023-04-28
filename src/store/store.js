@@ -8,12 +8,14 @@ import allRoomsReducer from "./slices/allRoomsSlice";
 import singleRoomsReducer from "./slices/singleRoomsSlice";
 import usersReducer from "./slices/usersSlice";
 import userUpdateReducer from "./slices/updateUserSlice";
+import forgotPasswordReducer from "./slices/forgotPasswordSlice";
 
 const combinedReducers = combineReducers({
   rooms: allRoomsReducer,
   singleRoom: singleRoomsReducer,
   userAuth: usersReducer,
   userUpdate: userUpdateReducer,
+  forgotPassword: forgotPasswordReducer,
 });
 
 const rootReducer = createReducer(
