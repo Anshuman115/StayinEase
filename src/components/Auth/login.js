@@ -72,7 +72,7 @@ const Login = () => {
                 />
               </div>
               <div>
-                <Link href="/forgotPassword">Forgot password</Link>
+                <Link href="/password/forgot">Forgot password</Link>
               </div>
               <div className="mt-8 flex justify-center text-lg text-black">
                 <button

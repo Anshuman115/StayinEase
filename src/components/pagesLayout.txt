@@ -31,3 +31,5 @@ AppContainer@webpack-internal:///./node_modules/next/dist/client/index.js:171:25
 Root@webpack-internal:///./node_modules/next/dist/client/index.js:346:37 next-dev.js:20:25
 //next redux wrapper docs problems
 //_app js setup problem resolved from docs
+
+//Reset password facility not working as expected

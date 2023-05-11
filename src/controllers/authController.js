@@ -10,6 +10,7 @@ import APIFeatures from "@/utils/apiFeatures";
 import { getSession } from "next-auth/react";
 import absoluteUrl from "next-absolute-url";
 import sendEmail from "@/utils/sendEmail";
+import crypto from "crypto";
 
 //Setting up cloudinary config
 cloudinary.config({
@@ -91,8 +92,9 @@ const updateUserProfile = catchAsyncErrors(async (req, res) => {
 });
 
 //Forgot password => /api/password/forgot
-const forgotPassword = catchAsyncErrors(async (req, res) => {
-  const user = await User.findOne(req.body.email);
+const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  console.log("email", req.body);
+  const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return next(new ErrorHandler("User Not Registered", 404));
   }
@@ -133,4 +135,52 @@ const forgotPassword = catchAsyncErrors(async (req, res) => {
   }
 });
 
-export { registerUser, currentUserProfile, updateUserProfile, forgotPassword };
+//Reset password => /api/password/reset/:token
+const resetPassword = catchAsyncErrors(async (req, res, next) => {
+  //Hash URL Token
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.query.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+  // console.log("user", user);
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        "Password reset token is invalid or has been expired",
+        400
+      )
+    );
+  }
+
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not match", 400));
+  }
+
+  console.log("password", req.body.password);
+
+  //setup new password
+  user.password = req.body.password;
+
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Password Updated Successfully",
+  });
+});
+
+export {
+  registerUser,
+  currentUserProfile,
+  resetPassword,
+  updateUserProfile,
+  forgotPassword,
+};

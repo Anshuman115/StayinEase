@@ -11,15 +11,15 @@ const sendEmail = async (options) => {
     auth: {
       // user: process.env.SMTP_USER,
       // pass: process.env.SMTP_PASSWORD,
-      user: "anshumantripathy1234@gmail.com",
+      user: process.env.SMTP_GMAIL_USER,
       //App specific password for nodemailer mailtrap smtp
-      pass: "lsmsaoyvvnzmvsct",
+      pass: process.env.SMTP_GMAIL_PASS,
     },
   });
 
   const message = {
     // from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
-    from: "anshumantripathy1234@gmail.com",
+    from: process.env.SMTP_GMAIL_USER,
     to: options.email,
     subject: options.subject,
     text: options.message,

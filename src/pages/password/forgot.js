@@ -2,7 +2,7 @@ import ForgotPassword from "@/components/Auth/ForgotPassword";
 import Layout from "@/components/Layout/Layout";
 import React from "react";
 
-const index = () => {
+const ForgotPasswordPage = () => {
   return (
     <Layout>
       <ForgotPassword />
@@ -10,4 +10,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default ForgotPasswordPage;
