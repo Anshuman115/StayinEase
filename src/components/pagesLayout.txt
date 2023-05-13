@@ -33,3 +33,5 @@ Root@webpack-internal:///./node_modules/next/dist/client/index.js:346:37 next-de
 //_app js setup problem resolved from docs
 
 //Reset password facility not working as expected
+//error while making post req to create new booking, due to forgot a parameter in booking model to default
+//error while room booking availablility check

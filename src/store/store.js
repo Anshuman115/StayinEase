@@ -10,6 +10,7 @@ import usersReducer from "./slices/usersSlice";
 import userUpdateReducer from "./slices/updateUserSlice";
 import forgotPasswordReducer from "./slices/forgotPasswordSlice";
 import resetPasswordReducer from "./slices/resetPasswordSlice";
+import checkBookingReducer from "./slices/checkBookingSlice";
 
 const combinedReducers = combineReducers({
   rooms: allRoomsReducer,
@@ -18,6 +19,7 @@ const combinedReducers = combineReducers({
   userUpdate: userUpdateReducer,
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
+  checkBooking: checkBookingReducer,
 });
 
 const rootReducer = createReducer(
