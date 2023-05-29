@@ -12,6 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { checkBooking } from "@/store/slices/checkBookingSlice";
 
+import { checkBookedDates } from "@/store/slices/checkBookedDatesSlice";
+
 const d = {
   success: true,
   room: {
@@ -60,7 +62,15 @@ const RoomDetails = () => {
   const { available, isLoading: bookingLoading } = useSelector(
     (state) => state.checkBooking
   );
-  console.log("avail", available);
+
+  const bookedDates = useSelector((state) => state.checkBookedDates.dates);
+  console.log("avail", bookedDates);
+
+  const excludeDates = [];
+  bookedDates?.forEach((date) => {
+    excludeDates.push(new Date(date));
+  });
+
   const { user } = useSelector((state) => state.userAuth);
 
   const onChange = (dates) => {
@@ -121,7 +131,8 @@ const RoomDetails = () => {
     }
     const { query } = router;
     dispatch(fetchRoom(query));
-  }, [router]);
+    dispatch(checkBookedDates(query));
+  }, [router, dispatch]);
 
   return (
     <div className="bg-[#fff7f3] w-full">
@@ -190,7 +201,7 @@ const RoomDetails = () => {
             startDate={checkInDate}
             endDate={checkOutDate}
             minDate={new Date()}
-            // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
+            excludeDates={excludeDates}
             selectsRange
             // selectsDisabledDaysInRange
             inline

@@ -16,21 +16,22 @@ const HomePage = () => {
 
 export default HomePage;
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, query }) => {
-      const { page, location } = query;
-      try {
-        const result = await store.dispatch(
-          fetchAllRooms({ req, page, location })
-        );
-        // const result2 = await store.dispatch(loadUser());
-        // console.log(result2);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req, query }) => {
+//       const { page, location } = query;
+//       try {
+//         console.log("heelow");
+//         const result = await store.dispatch(
+//           fetchAllRooms({ req, page, location })
+//         );
+//         // const result2 = await store.dispatch(loadUser());
+//         // console.log(result2);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     }
+// );
 
 // export const getServerSideProps = wrapper.getServerSideProps(() => {
 //   const { data: rooms } = useGetRoomsQuery();
