@@ -6,17 +6,33 @@ import { extendMoment } from "moment-range";
 
 const moment = extendMoment(Moment);
 
+//Probable Methods ->
+// momentIst = moment().tz("Asia/Kolkata");
+// submissionTime: moment(response.updatedAt)
+//           .utcOffset('+5:30')
+//           .format('DD/MM/YYYY h:mm:ss A'),
+
 // create new bookings => /api/bookings
 const newBooking = catchAsyncErrors(async (req, res) => {
-  // console.log(req);
-  const {
+  const timeDifference = moment().utcOffset() / 60;
+  console.log(timeDifference);
+
+  let {
     room,
-    checkInDate,
-    checkOutDate,
+    checkInDate: cin,
+    checkOutDate: cout,
     daysOfStay,
     amountPaid,
     paymentInfo,
   } = req.body;
+
+  //took a lot of time to fix -- finally reading docs helped
+  console.log(cin, cout);
+  const checkInDate = moment(cin).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+  const checkOutDate = moment(cout).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+
+  console.log(checkInDate);
+  console.log(checkOutDate);
 
   const booking = await Booking.create({
     room,
@@ -80,6 +96,8 @@ const checkBookedDatesOfRoom = catchAsyncErrors(async (req, res) => {
 
   const bookings = await Booking.find({ room: roomId });
 
+  // console.log(bookings);
+
   let bookedDates = [];
 
   const timeDifference = moment().utcOffset() / 60;
@@ -108,11 +126,37 @@ const checkBookedDatesOfRoom = catchAsyncErrors(async (req, res) => {
 
 //get all booking of current user => /api/bookings/me
 const myBookings = catchAsyncErrors(async (req, res) => {
-  const bookings = await Booking.find({ user: req.user._id });
+  const bookings = await Booking.find({ user: req.user._id })
+    .populate({
+      path: "room",
+      select: "name pricePerNight images",
+    })
+    .populate({
+      path: "user",
+      select: "name email",
+    });
 
   res.status(200).json({
     sucess: true,
     bookings,
+  });
+});
+
+//get booking details => /api/bookings/:id
+const getBookingDetails = catchAsyncErrors(async (req, res) => {
+  const booking = await Booking.findById(req.query.id)
+    .populate({
+      path: "room",
+      select: "name pricePerNight images",
+    })
+    .populate({
+      path: "user",
+      select: "name email",
+    });
+
+  res.status(200).json({
+    success: true,
+    booking,
   });
 });
 
@@ -121,4 +165,5 @@ export {
   checkRoomBookingAvailability,
   checkBookedDatesOfRoom,
   myBookings,
+  getBookingDetails,
 };
