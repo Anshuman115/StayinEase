@@ -21,7 +21,7 @@ const MyBookings = () => {
 
   const { bookings, error } = useSelector((state) => state.bookings);
   //   const setBookings = () => {};
-  console.log("bookings", bookings);
+  // console.log("bookings", bookings);
 
   const downloadInvoice = async (booking) => {
     var data = {

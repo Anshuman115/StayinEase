@@ -14,6 +14,8 @@ import { checkBooking } from "@/store/slices/checkBookingSlice";
 
 import { checkBookedDates } from "@/store/slices/checkBookedDatesSlice";
 
+import getStripe from "@/utils/getStripe";
+
 const d = {
   success: true,
   room: {
@@ -124,6 +126,26 @@ const RoomDetails = () => {
     }
   };
 
+  const [paymentLoading, setPaymentLoading] = useState(false);
+
+  const bookRoom = async (id, pricePerNight) => {
+    setPaymentLoading(true);
+    const price = pricePerNight * daysOfStay;
+    try {
+      const link = `/api/checkout_session/${id}?checkInDate=${checkInDate.toISOString()}&checkOutDate=${checkOutDate.toISOString()}&daysOfStay=${daysOfStay}`;
+
+      const { data } = await axios.get(link, { params: { price } });
+      const stripe = await getStripe();
+
+      stripe.redirectToCheckout({ sessionId: data.id });
+      setPaymentLoading(false);
+    } catch (error) {
+      setPaymentLoading(false);
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
   useEffect(() => {
     if (!router.isReady) {
       // console.log(router.query);
@@ -222,10 +244,14 @@ const RoomDetails = () => {
           )}
           {available && user && (
             <button
-              onClick={newBookingHandler}
+              onClick={() => {
+                // newBookingHandler();
+                bookRoom(data._id, data.pricePerNight);
+              }}
+              disabled={bookingLoading || paymentLoading ? true : false}
               className="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-700 hover:bg-green-600 text-white focus:outline-none focus-visible:ring-2"
             >
-              Book Now
+              Book Now - ${daysOfStay * data.pricePerNight}
             </button>
           )}
         </div>
