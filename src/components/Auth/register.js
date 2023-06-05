@@ -21,7 +21,7 @@ const Register = () => {
 
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(
-    "https://res.cloudinary.com/anshuman115cloud/image/upload/v1679168632/Stayin/avatar_default_oooqui.png"
+    "https://res.cloudinary.com/anshuman115cloudinary/image/upload/v1679168632/Stayin/avatar_default_oooqui.png"
   );
 
   const { success, error, loading } = useSelector((state) => state.userAuth);
