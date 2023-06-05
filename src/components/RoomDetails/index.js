@@ -16,6 +16,7 @@ import { checkBooking } from "@/store/slices/checkBookingSlice";
 import { checkBookedDates } from "@/store/slices/checkBookedDatesSlice";
 
 import getStripe from "@/utils/getStripe";
+import Link from "next/link";
 
 const d = {
   success: true,
@@ -198,7 +199,11 @@ const RoomDetails = () => {
               </span>
             </div>
           </div>
+          <Link className="text-black" href={`/reviews/${data?._id}`}>
+            Post a review
+          </Link>
         </div>
+
         <div className="relative flex flex-col h-full bg-[#6e3a24] shadow-lg rounded-lg p-5 max-w-xs">
           <div className="absolute top-0 right-5 ">
             <div className="text-xs inline-flex font-semibold bg-green-100 text-green-600 rounded-full text-center px-3 py-1.5 shadow-sm transform -translate-y-1/2">

@@ -14,6 +14,7 @@ import checkBookingReducer from "./slices/checkBookingSlice";
 import checkBookedDatesReducer from "./slices/checkBookedDatesSlice";
 import bookingsReducer from "./slices/bookingsSlice";
 import bookingsDetailsReducer from "./slices/bookingsDetailsSlice";
+import reviewsReducer from "./slices/reviewsSlice";
 
 const combinedReducers = combineReducers({
   rooms: allRoomsReducer,
@@ -26,6 +27,7 @@ const combinedReducers = combineReducers({
   checkBookedDates: checkBookedDatesReducer,
   bookings: bookingsReducer,
   bookingsDetails: bookingsDetailsReducer,
+  reviews: reviewsReducer,
 });
 
 const rootReducer = createReducer(
