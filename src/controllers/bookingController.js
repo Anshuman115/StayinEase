@@ -160,10 +160,36 @@ const getBookingDetails = catchAsyncErrors(async (req, res) => {
   });
 });
 
+//get all booking for ADMIN => /api/admin/bookings
+const allAdminBookings = catchAsyncErrors(async (req, res) => {
+  const bookings = await Booking.find();
+  res.status(200).json({
+    sucess: true,
+    bookings,
+  });
+});
+
+//delete booking for ADMIN => /api/admin/bookings
+const deleteBookings = catchAsyncErrors(async (req, res, next) => {
+  console.log(req.query.id);
+  const booking = await Booking.findById(req.query.id);
+
+  if (!booking) {
+    return next(new ErrorHandler("Booking with this id not found"));
+  }
+
+  await booking.deleteOne();
+  res.status(200).json({
+    sucess: true,
+  });
+});
+
 export {
   newBooking,
   checkRoomBookingAvailability,
   checkBookedDatesOfRoom,
   myBookings,
   getBookingDetails,
+  allAdminBookings,
+  deleteBookings,
 };

@@ -10,10 +10,11 @@ import {
 import onError from "../../../middlewares/errors";
 
 const handler = nc({ onError });
+import { isAuthenticatedUser, authorizeRoles } from "@/middlewares/auth";
 
 dbConnect();
 
 handler.get(allRooms);
-handler.post(newRoom);
+handler.use(isAuthenticatedUser, authorizeRoles("admin")).post(newRoom);
 
 export default handler;

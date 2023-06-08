@@ -64,6 +64,15 @@ const Header = () => {
                   </div>
                 </Link>
               </li>
+              {user.role === "admin" && (
+                <>
+                  <Link href="/admin/rooms">
+                    <div className="justify-between">
+                      <div>All Rooms </div>
+                    </div>
+                  </Link>
+                </>
+              )}
               <li>
                 <a>My Bookings</a>
               </li>

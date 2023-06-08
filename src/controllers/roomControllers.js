@@ -4,6 +4,8 @@ import ErrorHandler from "@/utils/errorHandler";
 
 import catchAsyncErrors from "@/middlewares/catchAsyncErrors";
 
+import cloudinary from "cloudinary";
+
 import APIFeatures from "@/utils/apiFeatures";
 
 const allRooms = catchAsyncErrors(async (req, res) => {
@@ -32,7 +34,24 @@ const allRooms = catchAsyncErrors(async (req, res) => {
 
 // create new room => /api/rooms
 const newRoom = catchAsyncErrors(async (req, res) => {
+  const images = req.body.images;
+  let imagesLink = [];
+  // console.log(req.user);
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "Stayin/Rooms",
+    });
+    imagesLink.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLink;
+  // req.body.user = req.user._id;
+
   const room = await Room.create(req.body);
+
   res.status(200).json({
     success: true,
     room,
@@ -65,6 +84,28 @@ const updateRoom = catchAsyncErrors(async (req, res) => {
     // });
     return next(new ErrorHandler("room not found ", 404));
   }
+
+  if (req.body.images) {
+    //delete images
+    for (let i = 0; i < room.images.length; i++) {
+      await cloudinary.v2.uploader.destroy(room.images[i].public_id);
+    }
+  }
+
+  const images = req.body.images;
+  let imagesLink = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "Stayin/Rooms",
+    });
+    imagesLink.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLink;
   room = await Room.findByIdAndUpdate(req.query.id, req.body, {
     new: true,
     runValidators: true,
@@ -86,7 +127,14 @@ const deleteRoom = catchAsyncErrors(async (req, res) => {
     // });
     return next(new ErrorHandler("room not found ", 404));
   }
-  await Room.remove();
+
+  //delete images
+  for (let i = 0; i < room.images.length; i++) {
+    await cloudinary.v2.uploader.destroy(room.images[i].public_id);
+  }
+
+  await room.deleteOne();
+
   res.status(200).json({
     success: true,
     message: "room is deleted succesfully",
@@ -147,6 +195,16 @@ const checkReviewAvailability = catchAsyncErrors(async (req, res) => {
   });
 });
 
+// Check all rooms - ADMIN => /api/admin/rooms
+const allAdminRooms = catchAsyncErrors(async (req, res) => {
+  const rooms = await Room.find();
+
+  res.status(200).json({
+    success: true,
+    rooms,
+  });
+});
+
 export {
   allRooms,
   newRoom,
@@ -155,4 +213,5 @@ export {
   deleteRoom,
   createRoomReview,
   checkReviewAvailability,
+  allAdminRooms,
 };
