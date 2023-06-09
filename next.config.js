@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 module.exports = {
   env: {
     DB_LOCAL_URI: `${process.env.DB_LOCAL_URI}`,
@@ -22,6 +22,8 @@ module.exports = {
 
     SMTP_GMAIL_USER: `${process.env.SMTP_GMAIL_USER}`,
     SMTP_GMAIL_PASS: `${process.env.SMTP_GMAIL_PASS}`,
+
+    NEXTAUTH_URL: `${process.env.NEXTAUTH_URL}`,
   },
   images: {
     domains: ["res.cloudinary.com", "images.unsplash.com"],
