@@ -10,7 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
-  }, []);
+  }, [dispatch]);
   const { user, isLoading } = useSelector((state) => state.userAuth);
 
   // console.log(user?.avatar?.url);

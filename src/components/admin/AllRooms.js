@@ -17,7 +17,7 @@ const AllRooms = () => {
       toast.error(error);
       // dispatch(clearErrors)
     }
-  }, []);
+  }, [dispatch]);
   const { loading, error, rooms } = useSelector((state) => state.adminRooms);
   console.log(rooms, "hel");
 

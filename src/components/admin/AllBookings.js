@@ -17,7 +17,7 @@ const AllBookings = () => {
       toast.error(error);
       // dispatch(clearErrors)
     }
-  }, []);
+  }, [dispatch]);
   const { isLoading, error, bookings } = useSelector(
     (state) => state.adminBookings
   );

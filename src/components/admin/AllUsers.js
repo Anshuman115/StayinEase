@@ -17,7 +17,7 @@ const AllUsers = () => {
       toast.error(error);
       // dispatch(clearErrors)
     }
-  }, []);
+  }, [dispatch]);
   const { isLoading, error, users } = useSelector((state) => state.adminUsers);
   console.log(users, "hel");
 

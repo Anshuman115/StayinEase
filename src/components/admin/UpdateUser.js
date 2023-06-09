@@ -26,7 +26,7 @@ const UpdateUser = () => {
     }
     const { query } = router;
     dispatch(getUserDetails(query));
-  }, []);
+  }, [dispatch]);
   const { userDetails, isLoading, error } = useSelector(
     (state) => state.adminUsers
   );

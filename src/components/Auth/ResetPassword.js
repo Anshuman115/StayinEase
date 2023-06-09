@@ -20,7 +20,7 @@ const NewPassword = () => {
     if (success) {
       router.push("/login");
     }
-  }, [dispatch, success, error]);
+  }, [dispatch, success, error, router]);
 
   const submitHandler = (e) => {
     e.preventDefault();
