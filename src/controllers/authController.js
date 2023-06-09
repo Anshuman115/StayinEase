@@ -178,10 +178,74 @@ const resetPassword = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+const getAllAdminUsers = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find();
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+//get user details - admin
+const getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.query.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User not found", 400));
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+//update user details - admin
+const updateUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+  const user = await User.findByIdAndUpdate(req.query.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  if (!user) {
+    return next(new ErrorHandler("User not found", 400));
+  }
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+//delete user - admin
+const deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.query.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User not found", 400));
+  }
+
+  await user.deleteOne();
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 export {
   registerUser,
   currentUserProfile,
   resetPassword,
   updateUserProfile,
   forgotPassword,
+  getAllAdminUsers,
+  getUserDetails,
+  updateUserDetails,
+  deleteUser,
 };

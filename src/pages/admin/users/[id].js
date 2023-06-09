@@ -4,17 +4,18 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { getSession } from "next-auth/react";
-import BookingsDetails from "@/components/Bookings/BookingsDetails";
+import AllUsers from "@/components/admin/AllUsers";
+import UpdateUser from "@/components/admin/UpdateUser";
 
-const AdminBookingsDetailsPage = () => {
+const UpdateUserPage = () => {
   return (
     <Layout>
-      <BookingsDetails />
+      <UpdateUser />
     </Layout>
   );
 };
 
-export default AdminBookingsDetailsPage;
+export default UpdateUserPage;
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req }) => {
