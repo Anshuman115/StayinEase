@@ -2,23 +2,25 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import absoluteUrl from "next-absolute-url";
 
-export const fetchBookings = createAsyncThunk(`api/bookings/me`, async () => {
-  // const { origin } = absoluteUrl(req);
-  // console.log(origin);
-  let link = `http://localhost:3000/api/bookings/me`;
-  try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const { data } = await axios.get(link, config);
-    // console.log("data", data);
-    return data;
-  } catch (error) {
-    return rejectWithValue(error.response.data.message);
+export const fetchBookings = createAsyncThunk(
+  `api/bookings/me`,
+  async (req) => {
+    const { origin } = absoluteUrl(req);
+    let link = `${origin}/api/bookings/me`;
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.get(link, config);
+      // console.log("data", data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
   }
-});
+);
 
 const initialState = {
   bookings: [],

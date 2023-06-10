@@ -45,7 +45,7 @@ const Register = () => {
       password,
       avatar,
     };
-    dispatch(registerUser(userData));
+    dispatch(registerUser({ userData }));
   };
 
   const handleOnchange = (e) => {

@@ -154,8 +154,8 @@ const RoomDetails = () => {
       return;
     }
     const { query } = router;
-    dispatch(fetchRoom(query));
-    dispatch(checkBookedDates(query));
+    dispatch(fetchRoom({ query }));
+    dispatch(checkBookedDates({ query }));
   }, [router, dispatch]);
 
   return (

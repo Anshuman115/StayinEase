@@ -21,7 +21,7 @@ const NewReview = () => {
 
   useEffect(() => {
     if (id !== undefined) {
-      dispatch(checkReview(id));
+      dispatch(checkReview({ id }));
     }
     if (error) {
       toast.error(error);
@@ -40,7 +40,7 @@ const NewReview = () => {
       roomId: id,
     };
     console.log("reviewData", reviewData);
-    dispatch(postNewReview(reviewData));
+    dispatch(postNewReview({ reviewData }));
   };
 
   const setUserRatings = () => {

@@ -1,16 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import absoluteUrl from "next-absolute-url";
 
 export const registerUser = createAsyncThunk(
   `auth/register`,
-  async (userData) => {
+  async ({ userData, req }) => {
+    const { origin } = absoluteUrl(req);
+
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
     const response = await axios.post(
-      `http://localhost:3000/api/auth/register`,
+      `${origin}/api/auth/register`,
       userData,
       config
     );
@@ -18,14 +21,16 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const loadUser = createAsyncThunk(`api/me`, async () => {
+export const loadUser = createAsyncThunk(`api/me`, async (req) => {
   // console.log("heree");
+  const { origin } = absoluteUrl(req);
+
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  const response = await axios.get(`http://localhost:3000/api/me`, config);
+  const response = await axios.get(`${origin}/api/me`, config);
   // console.log("response", response);
   return response.data;
 });

@@ -18,7 +18,7 @@ const BookingsDetails = () => {
     }
     const { query } = router;
     console.log("query", query);
-    dispatch(fetchBookingsDetails(query));
+    dispatch(fetchBookingsDetails({ query }));
   }, [dispatch]);
 
   const { bookingsDetails: booking, error } = useSelector(

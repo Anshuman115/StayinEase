@@ -1,17 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import absoluteUrl from "next-absolute-url";
 
 export const checkBooking = createAsyncThunk(
   `api/bookings/check`,
-  async (data) => {
+  async ({ id, cIn: checkInDate, cOut: checkOutDate, req }) => {
     // console.log(data);
-    const { id, cIn: checkInDate, cOut: checkOutDate } = data;
+    const { origin } = absoluteUrl(req);
     // const config = {
     //   headers: {
     //     "Content-Type": "application/json",
     //   },
     // };
-    let link = `http://localhost:3000/api/bookings/check?roomId=${id}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`;
+    let link = `${origin}/api/bookings/check?roomId=${id}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`;
     const response = await axios.get(link);
     // console.log(response.data);
     return response.data;

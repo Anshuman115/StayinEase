@@ -29,7 +29,7 @@ const ForgotPassword = () => {
 
     // console.log("email", userData);
 
-    dispatch(forgotPassword(userData));
+    dispatch(forgotPassword({ userData }));
   };
 
   const [email, setEmail] = useState("");

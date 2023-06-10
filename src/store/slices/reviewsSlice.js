@@ -4,15 +4,17 @@ import absoluteUrl from "next-absolute-url";
 
 export const postNewReview = createAsyncThunk(
   `api/review`,
-  async (reviewData) => {
+  async ({ reviewData, req }) => {
     // const { reviewData } = data;
-    let link = `http://localhost:3000/api/reviews`;
+    const { origin } = absoluteUrl(req);
+    let link = `${origin}/api/reviews`;
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
       };
+
       console.log(reviewData);
       const { data } = await axios.put(link, reviewData, config);
       console.log("data", data);
@@ -25,9 +27,10 @@ export const postNewReview = createAsyncThunk(
 
 export const checkReview = createAsyncThunk(
   `api/review/check_review_availability`,
-  async (roomId) => {
-    // const { reviewData } = data;
-    let link = `http://localhost:3000/api/reviews/check_review_availability?roomId=${roomId}`;
+  async ({ roomId, req }) => {
+    const { origin } = absoluteUrl(req);
+
+    let link = `${origin}/api/reviews/check_review_availability?roomId=${roomId}`;
     try {
       const config = {
         headers: {

@@ -21,7 +21,7 @@ const UpdateRoom = () => {
       return;
     }
     const { query } = router;
-    dispatch(fetchRoom(query));
+    dispatch(fetchRoom({ query }));
   }, [dispatch]);
   const { room, isLoading, error } = useSelector((state) => state.singleRoom);
 
