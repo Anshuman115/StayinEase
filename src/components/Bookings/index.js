@@ -134,8 +134,8 @@ const MyBookings = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((item) => (
-              <tr>
+            {bookings.map((item, index) => (
+              <tr key={index}>
                 <th>{item?._id}</th>
                 <td>{new Date(item?.checkInDate).toLocaleString("en-US")}</td>
                 <td>{new Date(item?.checkOutDate).toLocaleString("en-US")}</td>

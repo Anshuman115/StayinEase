@@ -1,5 +1,19 @@
 require("dotenv").config();
 module.exports = {
+  reactStrictMode: true,
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        tls: false,
+        net: false,
+        dns: false,
+        async_hooks: false,
+      };
+    }
+
+    return config;
+  },
   env: {
     DB_LOCAL_URI: `${process.env.DB_LOCAL_URI}`,
     DB_URI: `${process.env.DB_URI}`,

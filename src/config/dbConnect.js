@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+require("dotenv").config();
 
 const dbConnect = () => {
   if (mongoose.connection.readyState >= 1) {
@@ -6,7 +7,7 @@ const dbConnect = () => {
   }
   mongoose.set("strictQuery", false);
   mongoose
-    .connect(process.env.DB_LOCAL_URI, {
+    .connect(process.env.DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       // useFindAndModify: false,
