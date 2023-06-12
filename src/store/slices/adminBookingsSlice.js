@@ -30,7 +30,7 @@ export const deleteBookings = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      console.log(id);
+      // console.log(id);
       const { data } = await axios.delete(link, config);
       return data;
     } catch (error) {

@@ -19,7 +19,6 @@ const AllRooms = () => {
     }
   }, [dispatch]);
   const { loading, error, rooms } = useSelector((state) => state.adminRooms);
-  console.log(rooms, "hel");
 
   return (
     <div className="bg-[#fff7f3] w-full p-8">

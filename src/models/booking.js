@@ -19,7 +19,7 @@ utc.tz("Asia/Kolkata").format();
 // utc.setHours(utc.getHours() + 5);
 // utc.setMinutes(utc.getMinutes() + 30);
 
-console.log(utc);
+// console.log(utc);
 
 // var current = new Date();
 // const timeStamp = new Date(

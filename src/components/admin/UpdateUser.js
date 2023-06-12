@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Link from "next/link";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { postNewRoom, updateRoom } from "@/store/slices/adminRoomsSlice";
 import Image from "next/image";
-import { fetchRoom } from "@/store/slices/singleRoomsSlice";
 import {
   getUserDetails,
   updateUserDetails,
@@ -44,6 +42,8 @@ const UpdateUser = () => {
       }
     });
   };
+
+  console.log(userDetails);
 
   const initialValues = {
     name: userDetails?.name,

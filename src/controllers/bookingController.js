@@ -15,7 +15,7 @@ const moment = extendMoment(Moment);
 // create new bookings => /api/bookings
 const newBooking = catchAsyncErrors(async (req, res) => {
   const timeDifference = moment().utcOffset() / 60;
-  console.log(timeDifference);
+  // console.log(timeDifference);
 
   let {
     room,
@@ -27,12 +27,12 @@ const newBooking = catchAsyncErrors(async (req, res) => {
   } = req.body;
 
   //took a lot of time to fix -- finally reading docs helped
-  console.log(cin, cout);
+  // console.log(cin, cout);
   const checkInDate = moment(cin).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
   const checkOutDate = moment(cout).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
 
-  console.log(checkInDate);
-  console.log(checkOutDate);
+  // console.log(checkInDate);
+  // console.log(checkOutDate);
 
   const booking = await Booking.create({
     room,
@@ -171,7 +171,7 @@ const allAdminBookings = catchAsyncErrors(async (req, res) => {
 
 //delete booking for ADMIN => /api/admin/bookings
 const deleteBookings = catchAsyncErrors(async (req, res, next) => {
-  console.log(req.query.id);
+  // console.log(req.query.id);
   const booking = await Booking.findById(req.query.id);
 
   if (!booking) {

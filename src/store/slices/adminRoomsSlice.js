@@ -29,8 +29,8 @@ export const postNewRoom = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await axios.post(link, roomData, config);
-      console.log(data);
+      const { data } = await axios.post(link, roomData);
+      // console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

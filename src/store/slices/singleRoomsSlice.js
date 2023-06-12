@@ -4,7 +4,8 @@ import absoluteUrl from "next-absolute-url";
 
 export const fetchRoom = createAsyncThunk(
   `rooms/fetchRoom`,
-  async ({ id, req }) => {
+  async ({ query, req }) => {
+    const { id } = query;
     const { origin } = absoluteUrl(req);
     const response = await axios.get(`${origin}/api/rooms/${id}`);
     // console.log(response);

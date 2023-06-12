@@ -88,7 +88,7 @@ const webhookCheckout = catchAsyncErrors(async (req, res) => {
       const daysOfStay = session.metadata.daysOfStay;
 
       //took a lot of time to fix -- finally reading docs helped
-      console.log(cin, "helo ji", cout);
+      // console.log(cin, "helo ji", cout);
       const checkInDate = moment(cin).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
       const checkOutDate = moment(cout).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
 

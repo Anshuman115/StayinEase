@@ -1,5 +1,4 @@
 //dynamic route which can catch any other route in the api/auth
-
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/user";
@@ -40,6 +39,7 @@ export default NextAuth({
   session: {
     jwt: true,
   },
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {
       user && (token.user = user);

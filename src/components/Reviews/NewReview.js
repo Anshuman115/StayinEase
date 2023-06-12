@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { postNewReview } from "@/store/slices/reviewsSlice";
-import { checkReviewAvailability } from "@/controllers/roomControllers";
 import { checkReview } from "@/store/slices/reviewsSlice";
 
 const NewReview = () => {
