@@ -3,8 +3,10 @@ const mongoose = require("mongoose");
 
 const rooms = require("../data/rooms.json");
 
+require("dotenv").config();
+
 mongoose.set("strictQuery", false);
-mongoose.connect("mongodb://0.0.0.0:27017/stayin", {
+mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // useFindAndModify: false,

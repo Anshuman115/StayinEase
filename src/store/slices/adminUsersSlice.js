@@ -20,7 +20,8 @@ export const getAllAdminUsers = createAsyncThunk(
 
 export const getUserDetails = createAsyncThunk(
   `api/admin/users/:id`,
-  async ({ req, id }) => {
+  async ({ query, req }) => {
+    const { id } = query;
     const { origin } = absoluteUrl(req);
     // console.log(origin);
     let link = `${origin}/api/admin/users/${id}`;

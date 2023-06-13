@@ -40,8 +40,8 @@ const AllRooms = () => {
             </tr>
           </thead>
           <tbody>
-            {rooms.map((item) => (
-              <tr>
+            {rooms.map((item, index) => (
+              <tr key={index}>
                 <th>{item?._id}</th>
                 <td>{item?.name}</td>
                 <td>{item?.pricePerNight}</td>

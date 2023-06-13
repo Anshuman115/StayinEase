@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import absoluteUrl from "next-absolute-url";
 
 export const checkBookedDates = createAsyncThunk(
-  `api/bookings/check`,
-  async (data) => {
-    const { id } = data;
-    let link = `http://localhost:3000/api/bookings/check_booked_dates?roomId=${id}`;
+  `api/bookings/check_booked_dates`,
+  async ({ query, req }) => {
+    const { id } = query;
+    const { origin } = absoluteUrl(req);
+    console.log("here");
+    let link = `${origin}/api/bookings/check_booked_dates?roomId=${id}`;
     const response = await axios.get(link);
-    // console.log(response.data);
     return response.data;
   }
 );

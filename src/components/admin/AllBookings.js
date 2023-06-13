@@ -6,7 +6,10 @@ import { toast } from "react-toastify";
 import { FaFileInvoiceDollar } from "react-icons/fa";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { useRouter } from "next/router";
-import { deleteBookings, getAdminBookings } from "@/store/slices/adminBookings";
+import {
+  deleteBookings,
+  getAdminBookings,
+} from "@/store/slices/adminBookingsSlice";
 
 const AllBookings = () => {
   const dispatch = useDispatch();
@@ -37,8 +40,8 @@ const AllBookings = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((item) => (
-              <tr>
+            {bookings.map((item, index) => (
+              <tr key={index}>
                 <th>{item?._id}</th>
                 <td>{new Date(item?.checkInDate).toLocaleString("en-US")}</td>
                 <td>{new Date(item?.checkOutDate).toLocaleString("en-US")}</td>

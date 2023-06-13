@@ -21,7 +21,7 @@ export const postNewRoom = createAsyncThunk(
   "api/newRoom",
   async ({ req, roomData }) => {
     const { origin } = absoluteUrl(req);
-    let link = `${origin}/api/rooms`;
+    let link = `${origin}/api/admin/rooms`;
     try {
       // console.log(roomData);
       const config = {
@@ -40,9 +40,9 @@ export const postNewRoom = createAsyncThunk(
 
 export const updateRoom = createAsyncThunk(
   "api/room/:id",
-  async ({ req, roomData, id }) => {
+  async ({ req, roomData, id }, { rejectWithValue }) => {
     const { origin } = absoluteUrl(req);
-    let link = `${origin}/api/rooms/${id}`;
+    let link = `${origin}/api/admin/rooms/${id}`;
     try {
       // console.log(roomData);
       const config = {
@@ -50,6 +50,7 @@ export const updateRoom = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
+      console.log(origin, link, roomData);
       const { data } = await axios.put(link, roomData, config);
       console.log(data);
       return data;
@@ -60,7 +61,7 @@ export const updateRoom = createAsyncThunk(
 );
 
 export const deleteRoom = createAsyncThunk(
-  "api/room/:id",
+  "api/admin/room/:id",
   async ({ req, id }) => {
     const { origin } = absoluteUrl(req);
     let link = `${origin}/api/rooms/${id}`;

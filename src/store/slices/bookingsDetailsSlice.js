@@ -4,9 +4,10 @@ import absoluteUrl from "next-absolute-url";
 
 export const fetchBookingsDetails = createAsyncThunk(
   `api/bookings/:id`,
-  async (data) => {
-    const { id } = data;
-    let link = `http://localhost:3000/api/bookings/${id}`;
+  async ({ query, req }) => {
+    const { id } = query;
+    const { origin } = absoluteUrl(req);
+    let link = `${origin}/api/bookings/${id}`;
     try {
       const config = {
         headers: {

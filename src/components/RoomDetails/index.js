@@ -55,6 +55,16 @@ const RoomDetails = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!router.isReady) {
+      // console.log(router.query);
+      return;
+    }
+    const { query } = router;
+    dispatch(fetchRoom({ query }));
+    dispatch(checkBookedDates({ query }));
+  }, [router, dispatch]);
+
   const [checkInDate, setCheckInDate] = useState();
   const [checkOutDate, setCheckOutDate] = useState();
 
@@ -147,16 +157,6 @@ const RoomDetails = () => {
       toast.error(error.message);
     }
   };
-
-  useEffect(() => {
-    if (!router.isReady) {
-      // console.log(router.query);
-      return;
-    }
-    const { query } = router;
-    dispatch(fetchRoom(query));
-    dispatch(checkBookedDates(query));
-  }, [router, dispatch]);
 
   return (
     <div className="bg-[#fff7f3] w-full">

@@ -4,9 +4,9 @@ import absoluteUrl from "next-absolute-url";
 
 export const postNewReview = createAsyncThunk(
   `api/review`,
-  async (reviewData) => {
-    // const { reviewData } = data;
-    let link = `http://localhost:3000/api/reviews`;
+  async ({ reviewData, req }) => {
+    const { origin } = absoluteUrl(req);
+    let link = `${origin}/api/reviews`;
     try {
       const config = {
         headers: {
@@ -25,9 +25,10 @@ export const postNewReview = createAsyncThunk(
 
 export const checkReview = createAsyncThunk(
   `api/review/check_review_availability`,
-  async (roomId) => {
-    // const { reviewData } = data;
-    let link = `http://localhost:3000/api/reviews/check_review_availability?roomId=${roomId}`;
+  async ({ id: roomId, req }) => {
+    const { origin } = absoluteUrl(req);
+
+    let link = `${origin}/api/reviews/check_review_availability?roomId=${roomId}`;
     try {
       const config = {
         headers: {

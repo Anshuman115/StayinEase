@@ -8,6 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { postNewRoom, updateRoom } from "@/store/slices/adminRoomsSlice";
 import Image from "next/image";
 import { fetchRoom } from "@/store/slices/singleRoomsSlice";
+import { loadUser } from "@/store/slices/usersSlice";
 
 const UpdateRoom = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ const UpdateRoom = () => {
       return;
     }
     const { query } = router;
-    dispatch(fetchRoom(query));
-  }, []);
+    dispatch(fetchRoom({ query }));
+  }, [router, dispatch]);
   const { room, isLoading, error } = useSelector((state) => state.singleRoom);
 
   const [images, setImages] = useState([]);

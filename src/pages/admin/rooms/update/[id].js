@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout/Layout";
 import { wrapper } from "@/store/store";
 import React from "react";
-import dynamic from "next/dynamic";
 import { getSession } from "next-auth/react";
 import UpdateRoom from "@/components/admin/UpdateRoom";
 

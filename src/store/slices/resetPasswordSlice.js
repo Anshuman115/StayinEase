@@ -1,21 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import absoluteUrl from "next-absolute-url";
 
 export const resetPassword = createAsyncThunk(
   `api/password/reset`,
-  async (data) => {
-    // const { email } = data;
-    // console.log("email", email);
-    console.log(data);
-    const { token, passwords } = data;
-    console.log("token", token, "pass", passwords);
+  async ({ token, passwords, req }) => {
+    const { origin } = absoluteUrl(req);
+
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
     const response = await axios.put(
-      `http://localhost:3000/api/password/reset/${token}`,
+      `${origin}/api/password/reset/${token}`,
       passwords,
       config
     );

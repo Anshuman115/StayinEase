@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import absoluteUrl from "next-absolute-url";
 
-export const fetchRoom = createAsyncThunk(`rooms/fetchRoom`, async (data) => {
-  const { id } = data;
-  const response = await axios.get(`http://localhost:3000/api/rooms/${id}`);
-  // console.log(response);
-  return response.data;
-});
+export const fetchRoom = createAsyncThunk(
+  `rooms/fetchRoom`,
+  async ({ query, req }) => {
+    const { id } = query;
+    const { origin } = absoluteUrl(req);
+
+    const response = await axios.get(`${origin}/api/rooms/${id}`);
+    // console.log(response);
+    return response.data;
+  }
+);
 
 const initialState = {
   room: {},

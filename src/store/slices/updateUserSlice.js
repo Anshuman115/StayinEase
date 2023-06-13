@@ -1,16 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import absoluteUrl from "next-absolute-url";
 
 export const updateUserProfile = createAsyncThunk(
   `api/me/update`,
-  async (userData) => {
+  async ({ userData2: userData, req }) => {
+    const { origin } = absoluteUrl(req);
+
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
     const response = await axios.put(
-      `http://localhost:3000/api/me/update`,
+      `${origin}/api/me/update`,
       userData,
       config
     );

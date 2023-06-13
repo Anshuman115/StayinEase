@@ -51,7 +51,7 @@ const Profile = () => {
       password,
       avatar,
     };
-    dispatch(updateUserProfile(userData2));
+    dispatch(updateUserProfile({ userData2 }));
   };
 
   const handleOnchange = (e) => {

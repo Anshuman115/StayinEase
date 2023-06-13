@@ -3,16 +3,16 @@ import axios from "axios";
 
 export const forgotPassword = createAsyncThunk(
   `api/password/forgot`,
-  async (data) => {
-    // const { email } = data;
-    // console.log("email", email);
+  async ({ userData: data, req }) => {
+    const { origin } = absoluteUrl(req);
+
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
     const response = await axios.post(
-      `http://localhost:3000/api/password/forgot`,
+      `${origin}/api/password/forgot`,
       data,
       config
     );

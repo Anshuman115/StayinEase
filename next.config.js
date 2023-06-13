@@ -33,7 +33,8 @@ module.exports = {
     SMTP_GMAIL_USER: `${process.env.SMTP_GMAIL_USER}`,
     SMTP_GMAIL_PASS: `${process.env.SMTP_GMAIL_PASS}`,
 
-    // NEXTAUTH_URL: `${process.env.NEXTAUTH_URL}`,
+    NEXTAUTH_URL: `${process.env.NEXTAUTH_URL}`,
+    NEXTAUTH_SECRET: `${process.env.NEXTAUTH_SECRET}`,
   },
   images: {
     domains: ["res.cloudinary.com", "images.unsplash.com"],
