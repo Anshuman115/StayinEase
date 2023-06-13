@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { postNewReview } from "@/store/slices/reviewsSlice";
-import { checkReviewAvailability } from "@/controllers/roomControllers";
 import { checkReview } from "@/store/slices/reviewsSlice";
 
 const NewReview = () => {
@@ -31,7 +30,7 @@ const NewReview = () => {
       toast.success("review is posted");
       // dispatch(newreviewreset);
     }
-  }, [dispatch, success, error]);
+  }, [dispatch]);
 
   const submitHandler = () => {
     const reviewData = {
@@ -84,11 +83,11 @@ const NewReview = () => {
               {room.reviews &&
                 room.reviews.map((review, index) => (
                   //Numbering is must and need to show total reviews as well
-                  <React.Fragment key={index}>
+                  <div key={index}>
                     <div>By:- {review.name}</div>
                     <div>rating:- {review.rating}</div>
                     <div>Comment:- {review.comment}</div>
-                  </React.Fragment>
+                  </div>
                 ))}
             </div>
           </div>

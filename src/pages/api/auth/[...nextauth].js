@@ -40,6 +40,7 @@ export default NextAuth({
   session: {
     jwt: true,
   },
+  debug: true,
   callbacks: {
     async jwt({ token, user }) {
       user && (token.user = user);
