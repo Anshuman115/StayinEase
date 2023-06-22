@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="min-h-[25rem] bg-[#fff7f3] flex flex-col justify-end">
-      <footer className="w-4/6 h-full m-auto footer justify-between p-10 text-black">
+      <footer className="md:w-4/6 w-5/6 h-full m-auto footer justify-between lg:p-10 p-4 text-black">
         <div>
           <h1 className="text-xl">Stayin</h1>
           <p>

@@ -5,7 +5,7 @@ import Footer from "./Footer.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Layout = ({ children, title = "Stayin" }) => {
+const Layout = ({ children, title = "StayinEase" }) => {
   return (
     <div>
       <Head>
