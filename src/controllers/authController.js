@@ -116,6 +116,7 @@ const forgotPassword = catchAsyncErrors(async (req, res, next) => {
   If you have not requested this email then ignore it`;
 
   try {
+    console.log("email", user.email);
     await sendEmail({
       email: user.email,
       subject: "StayinEase Password Recovery",

@@ -41,14 +41,14 @@ const Rooms = () => {
   return (
     <>
       <Search />
-      <div className="flex justify-between p-12 bg-[#fff7f3]">
+      <div className="justify-between p-1 md:p-5 lg:p-10 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 bg-[#fff7f3]">
         {data?.rooms.map((item, i) => (
-          <div key={i} className="px-2">
+          <div key={i} className="px-2 py-2">
             <Roomcard {...item} key={i} />
           </div>
         ))}
       </div>
-      <div className="weo">
+      <div>
         {data?.resPerPage < data?.roomsCount && (
           <motion.div
             variants={paginationVariants}

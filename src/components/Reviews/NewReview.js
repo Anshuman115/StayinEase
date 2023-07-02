@@ -57,42 +57,49 @@ const NewReview = () => {
   console.log("room", room.reviews);
 
   return (
-    <div className="bg-[#fff7f3] w-full h-full text-black">
-      {isAvailable && (
-        <div>
-          <div>Post your rating</div>
-          <input
-            type="number"
-            onChange={(e) => {
-              setRating(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            name="comment"
-            onChange={(e) => {
-              setComment(e.target.value);
-            }}
-          />
-          <button type="submit" onClick={submitHandler}>
-            Submit
-          </button>
+    <div className="bg-[#fff7f3] w-full h-full text-black flex flex-col">
+      <div className="text-xl text-[#6e3a24] font-bold">Reviews: </div>
+      <div>
+        {isAvailable ? (
           <div>
-            Reviews
+            <div>Post your rating</div>
+            <input
+              type="number"
+              onChange={(e) => {
+                setRating(e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              name="comment"
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+            />
+            <button type="submit" onClick={submitHandler}>
+              Submit
+            </button>
             <div>
-              {room.reviews &&
-                room.reviews.map((review, index) => (
-                  //Numbering is must and need to show total reviews as well
-                  <div key={index}>
-                    <div>By:- {review.name}</div>
-                    <div>rating:- {review.rating}</div>
-                    <div>Comment:- {review.comment}</div>
-                  </div>
-                ))}
+              Reviews
+              <div>
+                {room.reviews &&
+                  room.reviews.map((review, index) => (
+                    //Numbering is must and need to show total reviews as well
+                    <div key={index}>
+                      <div>By:- {review.name}</div>
+                      <div>rating:- {review.rating}</div>
+                      <div>Comment:- {review.comment}</div>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="alert alert-warning w-2/5">
+            Please login and book the room to post review
+          </div>
+        )}
+      </div>
     </div>
   );
 };

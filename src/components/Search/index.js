@@ -13,16 +13,18 @@ const Search = () => {
   //   dispatch(fetchAllRooms({ location: location }));
   // }, [location, dispatch]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     if (location.trim()) {
       router.push(`/rooms/?location=${location}`);
     } else {
       router.push("/rooms/");
     }
+  }, [location]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
   };
 
-  //Category & Guest size filters to be added
   return (
     <div className="bg-[#fff7f3] flex justify-center w-full py-2">
       <input
@@ -32,7 +34,7 @@ const Search = () => {
         onChange={(e) => {
           setLocation(e.target.value);
         }}
-        className="input input-bordered input-accent w-full max-w-xs bg-[#fff7f3]"
+        className="input input-error w-full max-w-xs bg-[#fff7f3]"
       />
     </div>
   );

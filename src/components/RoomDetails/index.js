@@ -17,6 +17,7 @@ import { checkBookedDates } from "@/store/slices/checkBookedDatesSlice";
 
 import getStripe from "@/utils/getStripe";
 import Link from "next/link";
+import NewReview from "../Reviews/NewReview";
 
 const d = {
   success: true,
@@ -160,19 +161,23 @@ const RoomDetails = () => {
 
   return (
     <div className="bg-[#fff7f3] w-full">
-      <div className="p-5 flex justify-between">
+      <div className="p-3 flex flex-col md:flex-row justify-between items-center">
         <div>
           {data?.images && (
             <Image
               src={data?.images[0]?.url}
-              alt="hotel"
-              width={700}
-              height={700}
+              alt="hotel image"
+              className="h-[1/4] md:h-[2/4] lg:h-[3/4] w-[2/4] md:w-[3/4]"
+              width={500}
+              height={400}
             />
           )}
         </div>
-        <div className="flex flex-col p-2 w-[30%]">
-          <div className="text-black">{data?.description}</div>
+        <div className="flex flex-col p-2 w-full md:w-[40%]">
+          <div>
+            <div className="text-black text-lg font-bold">Info</div>
+            <div className="text-black">{data?.description}</div>
+          </div>
           <div className="flex flex-col p-2">
             <div className="flex flex-row items-center">
               <div>{data?.internet ? <FcCheckmark /> : <FcCancel />}</div>
@@ -199,12 +204,12 @@ const RoomDetails = () => {
               </span>
             </div>
           </div>
-          <Link className="text-black" href={`/reviews/${data?._id}`}>
-            Post a review
-          </Link>
+          {/* <Link className="text-black " href={`/reviews/${data?._id}`}>
+            <button className="btn btn-success">Reviews</button>
+          </Link> */}
         </div>
 
-        <div className="relative flex flex-col h-full bg-[#6e3a24] shadow-lg rounded-lg p-5 max-w-xs">
+        <div className="relative flex flex-col h-full bg-[#6e3a24] shadow-lg rounded-lg p-5 w-full md:max-w-xs ">
           <div className="absolute top-0 right-5 ">
             <div className="text-xs inline-flex font-semibold bg-green-100 text-green-600 rounded-full text-center px-3 py-1.5 shadow-sm transform -translate-y-1/2">
               Most Popular
@@ -223,44 +228,51 @@ const RoomDetails = () => {
               </span>
             </div>
           </header>
-          <DatePicker
-            selected={checkInDate}
-            onChange={onChange}
-            startDate={checkInDate}
-            endDate={checkOutDate}
-            minDate={new Date()}
-            excludeDates={excludeDates}
-            selectsRange
-            // selectsDisabledDaysInRange
-            inline
-          />
-          {available ? (
-            <>
-              <div>Room is available book now</div>
-            </>
-          ) : (
-            <>
-              <div>Room is not available try different dates</div>
-            </>
-          )}
-          {available && !user && (
-            <>
-              <div>Login to book !</div>
-            </>
-          )}
-          {available && user && (
-            <button
-              onClick={() => {
-                // newBookingHandler();
-                bookRoom(data._id, data.pricePerNight);
-              }}
-              disabled={bookingLoading || paymentLoading ? true : false}
-              className="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-700 hover:bg-green-600 text-white focus:outline-none focus-visible:ring-2"
-            >
-              Book Now - ${daysOfStay * data.pricePerNight}
-            </button>
-          )}
+          <div className="flex flex-col items-center">
+            <DatePicker
+              selected={checkInDate}
+              onChange={onChange}
+              startDate={checkInDate}
+              endDate={checkOutDate}
+              minDate={new Date()}
+              excludeDates={excludeDates}
+              selectsRange
+              // selectsDisabledDaysInRange
+              inline
+            />
+            <div className="text-white drop-shadow-[0_2.5px_2.5px_rgba(255,255,255,0.1)]">
+              {available ? (
+                <>
+                  <div>Room is available book now</div>
+                </>
+              ) : (
+                <>
+                  <div>Room is not available try different dates</div>
+                </>
+              )}
+              {available && !user && (
+                <>
+                  <div>Login to book !</div>
+                </>
+              )}
+              {available && user && (
+                <button
+                  onClick={() => {
+                    // newBookingHandler();
+                    bookRoom(data._id, data.pricePerNight);
+                  }}
+                  disabled={bookingLoading || paymentLoading ? true : false}
+                  className="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-green-700 hover:bg-green-600 text-white focus:outline-none focus-visible:ring-2"
+                >
+                  Book Now - ${daysOfStay * data.pricePerNight}
+                </button>
+              )}
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="p-4">
+        <NewReview />
       </div>
     </div>
   );

@@ -9,10 +9,11 @@
 
 body{
    font-family: 'Josefin Sans', sans-serif;
+   background-color: #fff7f3;
 }
 
 h1{
-font-family: 'Cormorant', serif;
+   font-family: 'Cormorant', serif;
 }
 
 .cormorant{

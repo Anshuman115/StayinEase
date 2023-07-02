@@ -58,15 +58,15 @@ const Header = () => {
               : "menu-horizontal"
           }`}
         >
-          <li>
-            <Link href="/">Home</Link>
-          </li>
+          <Link href="/">
+            <li>Home</li>
+          </Link>
           <li>
             <a>About</a>
           </li>
-          <li>
-            <Link href="/bookings/me">Bookings</Link>
-          </li>
+          <Link href="/bookings/me">
+            <li>Bookings</li>
+          </Link>
           <li>
             <a>Contact us</a>
           </li>
@@ -93,22 +93,23 @@ const Header = () => {
                       <Link href="/me/update">
                         <div className="justify-between">
                           <div>Profile</div>
-                          <span className="badge">New</span>
                         </div>
                       </Link>
                     </li>
                     {user.role === "admin" && (
-                      <>
+                      <li>
                         <Link href="/admin/rooms">
                           <div className="justify-between">
                             <div>All Rooms </div>
                           </div>
                         </Link>
-                      </>
+                        <Link href="/admin/bookings">
+                          <div className="justify-between">
+                            <div>All Bookings </div>
+                          </div>
+                        </Link>
+                      </li>
                     )}
-                    <li>
-                      <a>My Bookings</a>
-                    </li>
                     <li className="text-red-500">
                       <button onClick={handleSignOut}>Logout</button>
                     </li>

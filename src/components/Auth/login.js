@@ -41,12 +41,7 @@ const Login = () => {
         <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
           <div className="text-white">
             <div className="mb-8 flex flex-col items-center">
-              <img
-                src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logo.wine.svg"
-                width="150"
-                alt="ss"
-              />
-              <h1 className="mb-2 text-2xl">Stayin</h1>
+              <h1 className="mb-2 text-2xl">StayinEase</h1>
               <span className="text-gray-300">Enter Login Details</span>
             </div>
             <form onSubmit={submitHandler}>
