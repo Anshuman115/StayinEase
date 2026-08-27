@@ -2,16 +2,17 @@ import { fetchBookingsDetails } from "@/store/slices/bookingsDetailsSlice";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const BookingsDetails = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
+  const { bookingsDetails: booking, error } = useSelector(
+    (state) => state.bookingsDetails
+  );
+
   useEffect(() => {
-    if (error) {
-      toast.error(error);
-      //   dispatch(clearErrors());
-    }
     if (!router.isReady) {
       // console.log(router.query);
       return;
@@ -21,9 +22,11 @@ const BookingsDetails = () => {
     dispatch(fetchBookingsDetails(query));
   }, [router, dispatch]);
 
-  const { bookingsDetails: booking, error } = useSelector(
-    (state) => state.bookingsDetails
-  );
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   console.log("bookigns single:", booking);
 

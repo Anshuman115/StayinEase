@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const getAdminBookings = createAsyncThunk(
   `api/admin/bookings`,
   async (req) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(origin);
     let link = `${origin}/api/admin/bookings`;
     try {
@@ -21,7 +21,7 @@ export const getAdminBookings = createAsyncThunk(
 export const deleteBookings = createAsyncThunk(
   `api/admin/bookings/:id`,
   async ({ req, id }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(origin);
     let link = `${origin}/api/admin/bookings/${id}`;
     try {

@@ -6,7 +6,7 @@ export const fetchRoom = createAsyncThunk(
   `rooms/fetchRoom`,
   async ({ query, req }) => {
     const { id } = query;
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
 
     const response = await axios.get(`${origin}/api/rooms/${id}`);
     // console.log(response);

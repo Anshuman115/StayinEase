@@ -6,7 +6,7 @@ export const checkBooking = createAsyncThunk(
   `api/bookings/check`,
   async ({ id, cIn: checkInDate, cOut: checkOutDate, req }) => {
     // console.log(data);
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
 
     // const config = {
     //   headers: {

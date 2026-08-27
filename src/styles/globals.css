@@ -1,21 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&display=swap');
 
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "@tailwindcss/forms";
+@custom-variant dark (&:where(.dark, .dark *));
 
-body{
-   font-family: 'Josefin Sans', sans-serif;
-   background-color: #fff7f3;
+@theme {
+  --breakpoint-sm: 20rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
 }
 
-h1{
-   font-family: 'Cormorant', serif;
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #fff7f3;
 }
 
-.cormorant{
-   font-family: 'Cormorant', serif;
+h1 {
+  font-family: 'Cormorant', serif;
+}
+
+.cormorant {
+  font-family: 'Cormorant', serif;
 }

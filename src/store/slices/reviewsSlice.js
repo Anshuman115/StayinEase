@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const postNewReview = createAsyncThunk(
   `api/review`,
   async ({ reviewData, req }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     let link = `${origin}/api/reviews`;
     try {
       const config = {
@@ -26,7 +26,7 @@ export const postNewReview = createAsyncThunk(
 export const checkReview = createAsyncThunk(
   `api/review/check_review_availability`,
   async ({ id: roomId, req }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
 
     let link = `${origin}/api/reviews/check_review_availability?roomId=${roomId}`;
     try {

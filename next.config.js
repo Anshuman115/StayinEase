@@ -1,6 +1,7 @@
 require("dotenv").config();
 module.exports = {
   reactStrictMode: false,
+  turbopack: {},
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -37,7 +38,6 @@ module.exports = {
     NEXTAUTH_SECRET: `${process.env.NEXTAUTH_SECRET}`,
   },
   images: {
-    domains: ["res.cloudinary.com", "images.unsplash.com"],
     remotePatterns: [
       {
         protocol: "https",

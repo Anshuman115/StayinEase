@@ -14,16 +14,19 @@ import {
 const AllBookings = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  useEffect(() => {
-    dispatch(getAdminBookings());
-    if (error) {
-      toast.error(error);
-      // dispatch(clearErrors)
-    }
-  }, []);
   const { isLoading, error, bookings } = useSelector(
     (state) => state.adminBookings
   );
+
+  useEffect(() => {
+    dispatch(getAdminBookings());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
   console.log(bookings, "hel");
 
   return (

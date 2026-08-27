@@ -6,7 +6,7 @@ export const checkBookedDates = createAsyncThunk(
   `api/bookings/check_booked_dates`,
   async ({ query, req }) => {
     const { id } = query;
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     console.log("here");
     let link = `${origin}/api/bookings/check_booked_dates?roomId=${id}`;
     const response = await axios.get(link);

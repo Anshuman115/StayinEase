@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const fetchBookings = createAsyncThunk(
   `api/bookings/me`,
   async (req) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(origin);
     let link = `${origin}/api/bookings/me`;
     try {

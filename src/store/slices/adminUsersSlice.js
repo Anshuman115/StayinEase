@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const getAllAdminUsers = createAsyncThunk(
   `api/admin/users`,
   async (req) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(origin);
     let link = `${origin}/api/admin/users`;
     try {
@@ -22,7 +22,7 @@ export const getUserDetails = createAsyncThunk(
   `api/admin/users/:id`,
   async ({ query, req }) => {
     const { id } = query;
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(origin);
     let link = `${origin}/api/admin/users/${id}`;
     try {
@@ -38,7 +38,7 @@ export const getUserDetails = createAsyncThunk(
 export const updateUserDetails = createAsyncThunk(
   `api/admin/users/:id`,
   async ({ req, id, newUserDetails }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(origin);
     let link = `${origin}/api/admin/users/${id}`;
     try {
@@ -54,7 +54,7 @@ export const updateUserDetails = createAsyncThunk(
 export const deleteUser = createAsyncThunk(
   `api/admin/users/:id`,
   async ({ req, id }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(origin);
     let link = `${origin}/api/admin/users/${id}`;
     try {

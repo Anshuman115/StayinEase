@@ -9,7 +9,7 @@ export const fetchAllRooms = createAsyncThunk(
     { rejectWithValue }
   ) => {
     // let { page = 1, location = "", req } = data;
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     // console.log(page, location);
     let link = `${origin}/api/rooms?page=${page}&location=${location}`;
     try {

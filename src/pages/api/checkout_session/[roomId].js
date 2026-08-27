@@ -1,13 +1,13 @@
-import nc from "next-connect";
+import { createRouter } from "next-connect";
 import dbConnect from "../../../config/dbConnect";
 import { stripeCheckoutSession } from "../../../controllers/paymentController";
 import onError from "../../../middlewares/errors";
 import { isAuthenticatedUser } from "@/middlewares/auth";
 
-const handler = nc({ onError });
+const handler = createRouter();
 
 dbConnect();
 
 handler.use(isAuthenticatedUser).get(stripeCheckoutSession);
 
-export default handler;
+export default handler.handler({ onError });

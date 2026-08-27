@@ -10,6 +10,7 @@ const Header = () => {
   console.log("rendering header");
 
   const dispatch = useDispatch();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     dispatch(loadUser());
@@ -28,7 +29,6 @@ const Header = () => {
   }, []);
 
   const { user, isLoading } = useSelector((state) => state.userAuth);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // console.log(user?.avatar?.url);
   const handleSignOut = () => {

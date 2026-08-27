@@ -1,4 +1,3 @@
-import room from "@/models/room";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

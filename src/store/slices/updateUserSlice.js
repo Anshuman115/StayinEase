@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const updateUserProfile = createAsyncThunk(
   `api/me/update`,
   async ({ userData2: userData, req }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
 
     const config = {
       headers: {

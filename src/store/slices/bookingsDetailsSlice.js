@@ -6,7 +6,7 @@ export const fetchBookingsDetails = createAsyncThunk(
   `api/bookings/:id`,
   async ({ query, req }) => {
     const { id } = query;
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     let link = `${origin}/api/bookings/${id}`;
     try {
       const config = {

@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const registerUser = createAsyncThunk(
   `auth/register`,
   async ({ userData, req }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
 
     const config = {
       headers: {
@@ -22,7 +22,7 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loadUser = createAsyncThunk(`api/me`, async (req) => {
-  const { origin } = absoluteUrl(req);
+  const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
 
   const config = {
     headers: {

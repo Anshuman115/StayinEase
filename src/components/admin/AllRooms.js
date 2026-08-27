@@ -11,14 +11,17 @@ import { deleteRoom, getAdminRooms } from "@/store/slices/adminRoomsSlice";
 const AllRooms = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const { loading, error, rooms } = useSelector((state) => state.adminRooms);
+
   useEffect(() => {
     dispatch(getAdminRooms());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (error) {
       toast.error(error);
-      // dispatch(clearErrors)
     }
-  }, []);
-  const { loading, error, rooms } = useSelector((state) => state.adminRooms);
+  }, [error]);
   console.log(rooms, "hel");
 
   return (

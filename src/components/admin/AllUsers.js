@@ -11,14 +11,17 @@ import { deleteUser, getAllAdminUsers } from "@/store/slices/adminUsersSlice";
 const AllUsers = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const { isLoading, error, users } = useSelector((state) => state.adminUsers);
+
   useEffect(() => {
     dispatch(getAllAdminUsers());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (error) {
       toast.error(error);
-      // dispatch(clearErrors)
     }
-  }, []);
-  const { isLoading, error, users } = useSelector((state) => state.adminUsers);
+  }, [error]);
   console.log(users, "hel");
 
   return (

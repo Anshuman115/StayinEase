@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const forgotPassword = createAsyncThunk(
   `api/password/forgot`,
   async ({ userData: data, req }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
     console.log("data", data);
     const config = {
       headers: {

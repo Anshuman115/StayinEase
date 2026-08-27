@@ -1,4 +1,4 @@
-import nc from "next-connect";
+import { createRouter } from "next-connect";
 import dbConnect from "../../config/dbConnect";
 
 import { currentUserProfile } from "@/controllers/authController";
@@ -6,10 +6,10 @@ import { currentUserProfile } from "@/controllers/authController";
 import onError from "../../middlewares/errors";
 import { isAuthenticatedUser } from "@/middlewares/auth";
 
-const handler = nc({ onError });
+const handler = createRouter();
 
 dbConnect();
 
 handler.use(isAuthenticatedUser).get(currentUserProfile);
 
-export default handler;
+export default handler.handler({ onError });

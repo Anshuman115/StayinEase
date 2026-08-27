@@ -26,15 +26,9 @@ const UpdateRoom = () => {
   }, [router, dispatch]);
   const { room, isLoading, error } = useSelector((state) => state.singleRoom);
 
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
-
-  useEffect(() => {
-    if (room.images) {
-      setImages(room.images);
-      setImagesPreview(room.images);
-    }
-  }, [room]);
+  const [images, setImages] = useState(null);
+  const [imagesPreview, setImagesPreview] = useState(null);
+  const selectedImages = images ?? room.images ?? [];
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -59,9 +53,9 @@ const UpdateRoom = () => {
   const submitHandler = (values) => {
     const roomData = values;
     // console.log("roomData", roomData);
-    roomData.images = images;
+    roomData.images = selectedImages;
 
-    if (images.length === 0) return toast.error("Please upload images");
+    if (selectedImages.length === 0) return toast.error("Please upload images");
 
     console.log("imagesPreview :", roomData);
 
@@ -164,7 +158,7 @@ const UpdateRoom = () => {
                   <label className="">Choose Images</label>
                 </div>
 
-                {imagesPreview?.map((img) => (
+                {selectedImages.map((img) => (
                   <Image
                     src={img.url || img}
                     key={img.public_id || img}

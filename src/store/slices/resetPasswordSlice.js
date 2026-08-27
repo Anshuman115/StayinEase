@@ -5,7 +5,7 @@ import absoluteUrl from "next-absolute-url";
 export const resetPassword = createAsyncThunk(
   `api/password/reset`,
   async ({ token, passwords, req }) => {
-    const { origin } = absoluteUrl(req);
+    const origin = typeof window !== "undefined" ? window.location.origin : absoluteUrl(req).origin;
 
     const config = {
       headers: {
